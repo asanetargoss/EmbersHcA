@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -45,6 +47,7 @@ import teamroots.embers.block.BlockVacuum;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.particle.ParticleUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntitySeed extends TileEntity implements ITileEntityBase, ITickable {
@@ -139,7 +142,7 @@ public class TileEntitySeed extends TileEntity implements ITileEntityBase, ITick
 			size = 0;
 			for (int i = 0; i < 12; i ++){
 				if (willSpawn[i] && !getWorld().isRemote){
-					ItemStack nuggetStack = ItemStack.EMPTY;
+					ItemStack nuggetStack = EMPTY_ITEM_STACK;
 					if (material == 0){
 						nuggetStack = new ItemStack(RegistryManager.nugget_iron,1);
 					}

@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +34,7 @@ import teamroots.embers.item.ItemTinkerHammer;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.tileentity.TileEntityItemExtractor.EnumPipeConnection;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityFluidPipe extends TileFluidHandler implements ITileEntityBase, ITickable {
@@ -202,8 +205,8 @@ public class TileEntityFluidPipe extends TileFluidHandler implements ITileEntity
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem != ItemStack.EMPTY){
-			if (heldItem != ItemStack.EMPTY){
+		if (heldItem != EMPTY_ITEM_STACK){
+			if (heldItem != EMPTY_ITEM_STACK){
 				if (heldItem.getItem() instanceof ItemTinkerHammer){
 					if (side == EnumFacing.UP || side == EnumFacing.DOWN){
 						if (Math.abs(hitX-0.5) > Math.abs(hitZ-0.5)){

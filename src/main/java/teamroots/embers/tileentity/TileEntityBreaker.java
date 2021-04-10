@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -46,6 +48,7 @@ import teamroots.embers.block.BlockVacuum;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.particle.ParticleUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityBreaker extends TileEntity implements ITileEntityBase, ITickable {
@@ -115,7 +118,7 @@ public class TileEntityBreaker extends TileEntity implements ITileEntityBase, IT
 					if (getWorld().getTileEntity(binPos) instanceof TileEntityBin){
 						TileEntityBin bin = (TileEntityBin)getWorld().getTileEntity(binPos);
 						ItemStack remainder = bin.inventory.insertItem(0, i, false);
-						if (remainder != ItemStack.EMPTY && !getWorld().isRemote){
+						if (remainder != EMPTY_ITEM_STACK && !getWorld().isRemote){
 							EntityItem item = new EntityItem(getWorld(),getPos().offset(state.getValue(BlockBreaker.facing)).getX()+0.5,getPos().offset(state.getValue(BlockBreaker.facing)).getY()+1.0625f,getPos().offset(state.getValue(BlockBreaker.facing)).getZ()+0.5,remainder);
 							getWorld().spawnEntity(item);
 						}

@@ -1,5 +1,7 @@
 package teamroots.embers.util;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -61,13 +63,13 @@ public class Misc {
 			return mat;
 		}
 		if (stack.getItem() instanceof ItemArmor){
-			ItemStack mat = ((ItemArmor)stack.getItem()).getArmorMaterial().getRepairItemStack().copy();
+			ItemStack mat = new ItemStack(((ItemArmor)stack.getItem()).getArmorMaterial().getRepairItem());
 			if (mat.getItemDamage() == OreDictionary.WILDCARD_VALUE){
 				mat.setItemDamage(0);
 			}
 			return mat;
 		}
-		return ItemStack.EMPTY;
+		return EMPTY_ITEM_STACK;
 	}
 	
 	public static List<TileEntity> getAdjacentTiles(World world, BlockPos pos){
@@ -205,7 +207,7 @@ public class Misc {
 	public static void spawnInventoryInWorld(World world, double x, double y, double z, IItemHandler inventory){
 		if (inventory != null && !world.isRemote){
 			for (int i = 0; i < inventory.getSlots(); i ++){
-				if (inventory.getStackInSlot(i) != ItemStack.EMPTY){
+				if (inventory.getStackInSlot(i) != EMPTY_ITEM_STACK){
 					world.spawnEntity(new EntityItem(world,x,y,z,inventory.getStackInSlot(i)));
 				}
 			}

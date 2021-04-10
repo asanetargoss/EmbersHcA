@@ -1,5 +1,7 @@
 package teamroots.embers;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.awt.Color;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Field;
@@ -123,6 +125,7 @@ import teamroots.embers.util.EmberGenUtil;
 import teamroots.embers.util.EmberInventoryUtil;
 import teamroots.embers.util.FluidTextureUtil;
 import teamroots.embers.util.ItemModUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 import teamroots.embers.util.RenderUtil;
 import teamroots.embers.util.ShaderUtil;
@@ -198,13 +201,13 @@ public class EventManager {
 			EntityPlayer player = (EntityPlayer)event.getEntity();
 			String source = event.getSource().getDamageType();
 			if (source.compareTo("mob") != 0 && source.compareTo("generic") != 0 && source.compareTo("player") != 0 && source.compareTo("arrow") != 0){
-				if (player.getHeldItemMainhand() != ItemStack.EMPTY){
+				if (player.getHeldItemMainhand() != ItemUtil.EMPTY_ITEM_STACK){
 					if (player.getHeldItemMainhand().getItem() == RegistryManager.inflictor_gem && player.getHeldItemMainhand().hasTagCompound()){
 						player.getHeldItemMainhand().setItemDamage(1);
 						player.getHeldItemMainhand().getTagCompound().setString("type", event.getSource().getDamageType());
 					}
 				}
-				if (player.getHeldItemOffhand() != ItemStack.EMPTY){
+				if (player.getHeldItemOffhand() != ItemUtil.EMPTY_ITEM_STACK){
 					if (player.getHeldItemOffhand().getItem() == RegistryManager.inflictor_gem && player.getHeldItemOffhand().hasTagCompound()){
 						player.getHeldItemOffhand().setItemDamage(1);
 						player.getHeldItemOffhand().getTagCompound().setString("type", event.getSource().getDamageType());
@@ -212,10 +215,10 @@ public class EventManager {
 				}
 			}
 		}
-		if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD) != ItemStack.EMPTY &&
-				event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST) != ItemStack.EMPTY &&
-				event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS) != ItemStack.EMPTY &&
-				event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET) != ItemStack.EMPTY){
+		if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD) != ItemUtil.EMPTY_ITEM_STACK &&
+				event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST) != ItemUtil.EMPTY_ITEM_STACK &&
+				event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS) != ItemUtil.EMPTY_ITEM_STACK &&
+				event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET) != ItemUtil.EMPTY_ITEM_STACK){
 			if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() instanceof ItemAshenCloak &&
 					event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() instanceof ItemAshenCloak &&
 					event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() instanceof ItemAshenCloak &&
@@ -237,7 +240,7 @@ public class EventManager {
 		if (event.getSource().getEntity() instanceof EntityPlayer){
 			EntityPlayer damager = (EntityPlayer)event.getSource().getEntity();
 			ItemStack s = damager.getHeldItemMainhand();
-			if (!s.isEmpty()){
+			if (!stackEmpty(s)){
 				if (ItemModUtil.hasHeat(s)){
 					ItemModUtil.addHeat(s, 1.0f);
 				}
@@ -261,12 +264,12 @@ public class EventManager {
 		
 		int x = w/2;
 		int y = h/2;
-		if (player.getHeldItemMainhand() != ItemStack.EMPTY){
+		if (player.getHeldItemMainhand() != ItemUtil.EMPTY_ITEM_STACK){
 			if (player.getHeldItemMainhand().getItem() instanceof ItemEmberGauge){
 				showBar = true;
 			}
 		}
-		if (player.getHeldItemOffhand() != ItemStack.EMPTY){
+		if (player.getHeldItemOffhand() != ItemUtil.EMPTY_ITEM_STACK){
 			if (player.getHeldItemOffhand().getItem() instanceof ItemEmberGauge){
 				showBar = true;
 			}
@@ -384,7 +387,7 @@ public class EventManager {
 					EntityPlayer p = ((EntityPlayer)event.getSource().getEntity());
 					event.setAmount((event.getAmount()/4.0f)*(4.0f+(float)event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.ARMOR).getAttributeValue()*1.0f));
 				}
-				if (((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand() != ItemStack.EMPTY){
+				if (((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand() != ItemUtil.EMPTY_ITEM_STACK){
 					if (((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand().getItem() instanceof IEmberChargedTool){
 						if (((IEmberChargedTool)((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand().getItem()).hasEmber(((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand()) || ((EntityPlayer)event.getSource().getEntity()).capabilities.isCreativeMode){
 							event.getEntityLiving().setFire(1);
@@ -405,9 +408,9 @@ public class EventManager {
 	@SubscribeEvent
 	public void onBlockBreak(BlockEvent.BreakEvent event){
 		if (event.getPlayer() != null){
-			if (event.getPlayer().getHeldItemMainhand() != ItemStack.EMPTY){
+			if (event.getPlayer().getHeldItemMainhand() != ItemUtil.EMPTY_ITEM_STACK){
 				ItemStack s = event.getPlayer().getHeldItemMainhand();
-				if (!s.isEmpty() && event.getState().getBlockHardness(event.getWorld(), event.getPos()) > 0){
+				if (!stackEmpty(s) && event.getState().getBlockHardness(event.getWorld(), event.getPos()) > 0){
 					if (ItemModUtil.hasHeat(s)){
 						ItemModUtil.addHeat(s, 1.0f);
 					}

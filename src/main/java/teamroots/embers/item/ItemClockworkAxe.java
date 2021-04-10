@@ -166,10 +166,11 @@ public class ItemClockworkAxe extends ItemTool implements IModeledItem, IEmberCh
 		return true;
 	}
 	
-	@Override
+	// 1.11-specific
+	/*@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchant){
 		return enchant.type == EnumEnchantmentType.WEAPON || enchant.type == EnumEnchantmentType.DIGGER;
-	}
+	}*/
 	
 	@Override
 	public void initModel(){

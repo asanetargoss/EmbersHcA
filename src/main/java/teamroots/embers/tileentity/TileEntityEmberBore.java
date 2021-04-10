@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -27,6 +29,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 import teamroots.embers.world.EmberWorldData;
 
@@ -64,7 +67,7 @@ public class TileEntityEmberBore extends TileEntity implements ITileEntityBase, 
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate){
         	if (slot == stackFuel){
-        		return ItemStack.EMPTY;
+        		return EMPTY_ITEM_STACK;
         	}
         	return super.extractItem(slot, amount, simulate);
         }
@@ -138,11 +141,11 @@ public class TileEntityEmberBore extends TileEntity implements ITileEntityBase, 
 				ticksFueled --;
 			}
 			if (ticksFueled == 0){
-				if (inventory.getStackInSlot(stackFuel) != ItemStack.EMPTY){
+				if (inventory.getStackInSlot(stackFuel) != ItemUtil.EMPTY_ITEM_STACK){
 					ticksFueled = TileEntityFurnace.getItemBurnTime(inventory.getStackInSlot(stackFuel).copy());
-					inventory.getStackInSlot(stackFuel).shrink(1);
-					if (inventory.getStackInSlot(stackFuel).getCount() <= 0){
-						inventory.setStackInSlot(stackFuel, ItemStack.EMPTY);
+					inventory.getStackInSlot(stackFuel).stackSize -= 1; // TODO: This looks dangerous
+					if (inventory.getStackInSlot(stackFuel).stackSize <= 0){
+						inventory.setStackInSlot(stackFuel, ItemUtil.EMPTY_ITEM_STACK);
 					}
 					markDirty();
 				}
@@ -151,9 +154,9 @@ public class TileEntityEmberBore extends TileEntity implements ITileEntityBase, 
 				if (random.nextFloat() < EmberGenUtil.getEmberDensity(world.getSeed(), getPos().getX(), getPos().getZ())){
 					int chance = random.nextInt(4);
 					if (chance == 0){
-						if (inventory.getStackInSlot(stackCrystals) != ItemStack.EMPTY){ 
-							if (inventory.getStackInSlot(stackCrystals).getCount() < inventory.getStackInSlot(stackCrystals).getMaxStackSize()){
-								inventory.getStackInSlot(stackCrystals).setCount(Math.min(64, inventory.getStackInSlot(stackCrystals).getCount()));
+						if (inventory.getStackInSlot(stackCrystals) != ItemUtil.EMPTY_ITEM_STACK){ 
+							if (inventory.getStackInSlot(stackCrystals).stackSize < inventory.getStackInSlot(stackCrystals).getMaxStackSize()){
+								inventory.getStackInSlot(stackCrystals).stackSize = Math.min(64, inventory.getStackInSlot(stackCrystals).stackSize);
 							}
 						}
 						else {
@@ -162,9 +165,9 @@ public class TileEntityEmberBore extends TileEntity implements ITileEntityBase, 
 						markDirty();
 					}
 					else {
-						if (inventory.getStackInSlot(stackShards) != ItemStack.EMPTY){
-							if (inventory.getStackInSlot(stackShards).getCount() < inventory.getStackInSlot(stackShards).getMaxStackSize()){
-								inventory.getStackInSlot(stackShards).setCount(Math.min(inventory.getStackInSlot(stackShards).getMaxStackSize(), inventory.getStackInSlot(stackShards).getCount()));
+						if (inventory.getStackInSlot(stackShards) != ItemUtil.EMPTY_ITEM_STACK){
+							if (inventory.getStackInSlot(stackShards).stackSize < inventory.getStackInSlot(stackShards).getMaxStackSize()){
+								inventory.getStackInSlot(stackShards).stackSize = Math.min(inventory.getStackInSlot(stackShards).getMaxStackSize(), inventory.getStackInSlot(stackShards).stackSize);
 							}
 						}
 						else {

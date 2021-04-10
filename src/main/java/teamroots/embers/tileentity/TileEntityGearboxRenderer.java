@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +22,7 @@ import teamroots.embers.EventManager;
 import teamroots.embers.RegistryManager;
 import teamroots.embers.block.BlockAxle;
 import teamroots.embers.block.BlockGearbox;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.RenderUtil;
 import teamroots.embers.util.StructBox;
 import teamroots.embers.util.StructUV;
@@ -36,7 +39,7 @@ public class TileEntityGearboxRenderer extends TileEntitySpecialRenderer {
 			TileEntityGearbox box = (TileEntityGearbox)t;
 			if (state.getBlock() instanceof BlockGearbox){
 				for (int i = 0; i < 6; i ++){
-					if (!box.gears[i].isEmpty()){
+					if (!stackEmpty(box.gears[i])){
 						EnumFacing face = EnumFacing.getFront(i);
 				        
 			            GlStateManager.disableCull();

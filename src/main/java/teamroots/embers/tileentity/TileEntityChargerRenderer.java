@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
@@ -11,6 +13,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import teamroots.embers.util.ItemUtil;
 
 public class TileEntityChargerRenderer extends TileEntitySpecialRenderer {
 	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
@@ -23,7 +26,7 @@ public class TileEntityChargerRenderer extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks, int destroyStage){
 		if (tile instanceof TileEntityCharger){
 			TileEntityCharger charger = (TileEntityCharger)tile;
-			if (charger.inventory.getStackInSlot(0) != ItemStack.EMPTY){
+			if (charger.inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 					GL11.glPushMatrix();

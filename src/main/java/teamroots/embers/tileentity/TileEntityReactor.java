@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -28,6 +30,7 @@ import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.power.EmberCapabilityProvider;
 import teamroots.embers.power.IEmberCapability;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityReactor extends TileEntity implements ITileEntityBase, ITickable {
@@ -126,7 +129,7 @@ public class TileEntityReactor extends TileEntity implements ITileEntityBase, IT
 
 	@Override
 	public void update() {
-		if (!inventory.getStackInSlot(0).isEmpty()){
+		if (!stackEmpty(inventory.getStackInSlot(0))){
 			progress ++;
 			if (progress > 20){
 				float catalyzerMult = 0.0f;

@@ -1,5 +1,8 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +38,7 @@ import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.power.DefaultMechCapability;
 import teamroots.embers.power.MechCapabilityProvider;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntitySteamEngine extends TileEntity implements ITileEntityBase, ITickable {
@@ -60,7 +64,7 @@ public class TileEntitySteamEngine extends TileEntity implements ITileEntityBase
         
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate){
-        	return ItemStack.EMPTY;
+        	return EMPTY_ITEM_STACK;
         }
         
 	};
@@ -183,15 +187,15 @@ public class TileEntitySteamEngine extends TileEntity implements ITileEntityBase
 			this.front = state.getValue(BlockSteamEngine.facing);
 		}
 		if (progress == 0){
-			if (!inventory.getStackInSlot(0).isEmpty() && tank.getFluid() != null && tank.getFluid().getFluid() == FluidRegistry.WATER && tank.getFluidAmount() > 10){
+			if (!stackEmpty(inventory.getStackInSlot(0)) && tank.getFluid() != null && tank.getFluid().getFluid() == FluidRegistry.WATER && tank.getFluidAmount() > 10){
 				ItemStack stack = inventory.getStackInSlot(0).copy();
-				stack.setCount(1);
+				stack.stackSize = 1;
 				int fuel = TileEntityFurnace.getItemBurnTime(stack);
 				if (fuel > 0){
 					progress = fuel;
-					inventory.getStackInSlot(0).shrink(1);
-					if (inventory.getStackInSlot(0).isEmpty()){
-						inventory.setStackInSlot(0, ItemStack.EMPTY);
+					inventory.getStackInSlot(0).stackSize -= 1; // TODO: This looks dangerous
+					if (stackEmpty(inventory.getStackInSlot(0))){
+						inventory.setStackInSlot(0, EMPTY_ITEM_STACK);
 					}
 					markDirty();
 				}

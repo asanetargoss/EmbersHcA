@@ -2,7 +2,6 @@ package teamroots.embers;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +23,7 @@ public class Embers {
 	public static final String VERSION = "0.216";
 	public static final String DEPENDENCIES = "";
 	
-    @SidedProxy(clientSide = "teamroots.embers.proxy.ClientProxy",serverSide = "teamroots.embers.proxy.ServerProxy")
+	@SidedProxy(clientSide = "teamroots.embers.proxy.ClientProxy",serverSide = "teamroots.embers.proxy.ServerProxy")
     public static CommonProxy proxy;
 	
 	public static CreativeTabs tab = new CreativeTabs("embers") {
@@ -34,8 +33,8 @@ public class Embers {
     	}
 		@Override
 		@SideOnly(Side.CLIENT)
-		public ItemStack getTabIconItem(){
-			return new ItemStack(RegistryManager.crystal_ember,1);
+		public Item getTabIconItem(){
+			return RegistryManager.crystal_ember;
 		}
 	};
 	
@@ -46,8 +45,8 @@ public class Embers {
     	}
 		@Override
 		@SideOnly(Side.CLIENT)
-		public ItemStack getTabIconItem(){
-			return new ItemStack(RegistryManager.ingot_dawnstone,1);
+		public Item getTabIconItem(){
+			return RegistryManager.ingot_dawnstone;
 		}
 	};
 	

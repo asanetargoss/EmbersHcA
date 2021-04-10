@@ -1,5 +1,8 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +35,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.power.DefaultMechCapability;
 import teamroots.embers.power.MechCapabilityProvider;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
@@ -39,12 +43,12 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 	EnumFacing from = null;
 	public int connections = 0;
 	public ItemStack[] gears = new ItemStack[]{
-			ItemStack.EMPTY,
-			ItemStack.EMPTY,
-			ItemStack.EMPTY,
-			ItemStack.EMPTY,
-			ItemStack.EMPTY,
-			ItemStack.EMPTY
+			EMPTY_ITEM_STACK,
+			EMPTY_ITEM_STACK,
+			EMPTY_ITEM_STACK,
+			EMPTY_ITEM_STACK,
+			EMPTY_ITEM_STACK,
+			EMPTY_ITEM_STACK
 	};
 	
 	public DefaultMechCapability capability = new DefaultMechCapability(){
@@ -57,7 +61,7 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 
 		@Override
 		public double getPower(EnumFacing from) {
-			if (from != null && gears[from.getIndex()].isEmpty()){
+			if (from != null && stackEmpty(gears[from.getIndex()])){
 				return 0;
 			}
 			if (from == TileEntityGearbox.this.from || from == null){
@@ -70,7 +74,7 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 
 		@Override
 		public void setPower(double value, EnumFacing from) {
-			if (from != null && gears[from.getIndex()].isEmpty()){
+			if (from != null && stackEmpty(gears[from.getIndex()])){
 				return;
 			}
 			if (from == TileEntityGearbox.this.from || from == null){
@@ -102,7 +106,7 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 			}
 		}
 		for (EnumFacing f : toUpdate){
-			if (!getGear(f).isEmpty()){
+			if (!stackEmpty(getGear(f))){
 				connections ++;
 			}
 		}
@@ -149,7 +153,7 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 			from = EnumFacing.getFront(tag.getInteger("from"));
 		}
 		for (int i = 0; i < 6; i ++){
-			gears[i] = new ItemStack(tag.getCompoundTag("gear"+i));
+			gears[i] = ItemStack.func_77949_a((tag.getCompoundTag("gear"+i)));
 		}
 		connections = tag.getInteger("connections");
 	}
@@ -212,15 +216,15 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (!heldItem.isEmpty()){
+		if (!stackEmpty(heldItem)){
 			if (heldItem.getItem() instanceof ItemGear){
-				if (getGear(side).isEmpty()){
+				if (stackEmpty(getGear(side))){
 					ItemStack gear = heldItem.copy();
-					gear.setCount(1);
+					gear.stackSize = 1;
 					this.setGear(side,gear);
-					heldItem.shrink(1);
-					if (heldItem.getCount() == 0){
-						player.setHeldItem(hand, ItemStack.EMPTY);
+					heldItem.stackSize -= 1; // TODO: This looks dangerous
+					if (heldItem.stackSize == 0){
+						player.setHeldItem(hand, EMPTY_ITEM_STACK);
 					}
 					capability.onContentsChanged();
 					return true;
@@ -228,12 +232,12 @@ public class TileEntityGearbox extends TileEntity implements ITileEntityBase {
 			}
 		}
 		else {
-			if (!getGear(side).isEmpty()){
+			if (!stackEmpty(getGear(side))){
 				ItemStack gear = getGear(side);
 				if (!world.isRemote){
 					world.spawnEntity(new EntityItem(world,player.posX,player.posY+player.height/2.0f,player.posZ,gear));
 				}
-				setGear(side,ItemStack.EMPTY);
+				setGear(side,EMPTY_ITEM_STACK);
 				capability.onContentsChanged();
 				return true;
 			}

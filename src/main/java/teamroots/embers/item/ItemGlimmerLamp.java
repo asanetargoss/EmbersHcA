@@ -47,8 +47,7 @@ public class ItemGlimmerLamp extends ItemBase {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand){
-		ItemStack stack = player.getHeldItem(hand);
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
 		if (stack.hasTagCompound()){
 			if (stack.getTagCompound().getInteger("light") >= 10){
 				stack.getTagCompound().setInteger("light",stack.getTagCompound().getInteger("light")-10);

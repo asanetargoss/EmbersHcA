@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -27,6 +29,7 @@ import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.power.EmberCapabilityProvider;
 import teamroots.embers.power.IEmberCapability;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityCharger extends TileEntity implements ITileEntityBase, ITickable {
@@ -106,7 +109,7 @@ public class TileEntityCharger extends TileEntity implements ITileEntityBase, IT
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem != ItemStack.EMPTY){
+		if (heldItem != EMPTY_ITEM_STACK){
 			if (heldItem.getItem() instanceof IEmberItem){
 				player.setHeldItem(hand, this.inventory.insertItem(0,heldItem,false));
 				markDirty();
@@ -114,9 +117,9 @@ public class TileEntityCharger extends TileEntity implements ITileEntityBase, IT
 			}
 		}
 		else {
-			if (inventory.getStackInSlot(0) != ItemStack.EMPTY){
+			if (inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (!getWorld().isRemote){
-					player.setHeldItem(hand, inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false));
+					player.setHeldItem(hand, inventory.extractItem(0, inventory.getStackInSlot(0).stackSize, false));
 					markDirty();
 				}
 				return true;
@@ -135,7 +138,7 @@ public class TileEntityCharger extends TileEntity implements ITileEntityBase, IT
 	@Override
 	public void update() {
 		turnRate = 1;
-		if (inventory.getStackInSlot(0) != ItemStack.EMPTY && capability.getEmber() > 0){
+		if (inventory.getStackInSlot(0) != EMPTY_ITEM_STACK && capability.getEmber() > 0){
 			if (inventory.getStackInSlot(0).getItem() instanceof IEmberItem){
 				//turnRate = 6;
 				double emberAdded = ((IEmberItem)inventory.getStackInSlot(0).getItem()).addAmount(inventory.getStackInSlot(0),Math.min(10.0, capability.getEmber()), true);

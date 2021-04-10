@@ -61,7 +61,7 @@ public class BlockStoneEdge extends BlockBase {
 	}
 
     @Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean b)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn)
     {
 		if (state.getValue(BlockStoneEdge.state) == 9 || state.getValue(BlockStoneEdge.state) == 4){
 	        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_ZFACE);

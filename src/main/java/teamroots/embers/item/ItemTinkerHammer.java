@@ -35,8 +35,7 @@ public class ItemTinkerHammer extends ItemBase {
 	}
 	
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ){
-		ItemStack stack = player.getHeldItem(hand);
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing face, float hitX, float hitY, float hitZ){
 		TileEntity tile = world.getTileEntity(pos);
 		if (player.isSneaking()){
 			stack.getTagCompound().setInteger("targetX", pos.getX());

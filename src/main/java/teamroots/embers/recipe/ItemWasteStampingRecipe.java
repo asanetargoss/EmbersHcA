@@ -1,5 +1,7 @@
 package teamroots.embers.recipe;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import net.minecraft.item.ItemStack;
@@ -7,6 +9,7 @@ import net.minecraftforge.fluids.FluidStack;
 import teamroots.embers.RegistryManager;
 import teamroots.embers.item.EnumStampType;
 import teamroots.embers.item.ItemAlchemicWaste;
+import teamroots.embers.util.ItemUtil;
 
 public class ItemWasteStampingRecipe extends ItemStampingRecipe{
 	Random random = new Random();
@@ -16,10 +19,10 @@ public class ItemWasteStampingRecipe extends ItemStampingRecipe{
 	
 	public boolean matches(ItemStack stack, FluidStack fluid, EnumStampType type){
 		boolean matchesItem = false;
-		if (stack == ItemStack.EMPTY && this.stack == ItemStack.EMPTY){
+		if (stack == EMPTY_ITEM_STACK && this.stack == EMPTY_ITEM_STACK){
 			matchesItem = true;
 		}
-		else if (this.stack != ItemStack.EMPTY && stack != ItemStack.EMPTY){
+		else if (this.stack != EMPTY_ITEM_STACK && stack != EMPTY_ITEM_STACK){
 			if (this.matchNBT){
 				matchesItem = this.stack.getItem().equals(stack.getItem()) && this.stack.getMetadata() == stack.getMetadata() && ItemStack.areItemStackTagsEqual(this.stack, stack);
 			}

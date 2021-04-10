@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -22,6 +24,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import teamroots.embers.EventManager;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityKnowledgeTable extends TileEntity implements ITileEntityBase, ITickable {
@@ -90,15 +93,15 @@ public class TileEntityKnowledgeTable extends TileEntity implements ITileEntityB
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem != ItemStack.EMPTY){
+		if (heldItem != EMPTY_ITEM_STACK){
 			player.setHeldItem(hand, this.inventory.insertItem(0,heldItem,false));
 			markDirty();
 			return true;
 		}
 		else {
-			if (inventory.getStackInSlot(0) != ItemStack.EMPTY){
+			if (inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (!getWorld().isRemote){
-					player.setHeldItem(hand, inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false));
+					player.setHeldItem(hand, inventory.extractItem(0, inventory.getStackInSlot(0).stackSize, false));
 					markDirty();
 				}
 				return true;

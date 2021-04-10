@@ -1,5 +1,8 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,6 +37,7 @@ import teamroots.embers.block.BlockVacuum;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.particle.ParticleUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityItemVacuum extends TileEntity implements ITileEntityBase, ITickable, IPressurizable, IItemPipePriority {
@@ -149,9 +153,9 @@ public class TileEntityItemVacuum extends TileEntity implements ITileEntityBase,
 			if (nearestItems.size() > 0){
 				for (EntityItem item : nearestItems){
 					ItemStack stack = inventory.insertItem(0, item.getEntityItem(), true);
-					if (stack.getItem() == item.getEntityItem().getItem() && stack.getItemDamage() == item.getEntityItem().getItemDamage() && stack.getCount() < item.getEntityItem().getCount() || stack == ItemStack.EMPTY){
+					if (stack.getItem() == item.getEntityItem().getItem() && stack.getItemDamage() == item.getEntityItem().getItemDamage() && stack.stackSize < item.getEntityItem().stackSize || stack == EMPTY_ITEM_STACK){
 						item.setEntityItemStack(inventory.insertItem(0, item.getEntityItem(), false));
-						if (item.getEntityItem().isEmpty()){
+						if (stackEmpty(item.getEntityItem())){
 							world.removeEntity(item);
 						}
 						if (!toUpdate.contains(getPos())){
@@ -165,7 +169,7 @@ public class TileEntityItemVacuum extends TileEntity implements ITileEntityBase,
 		connections.add(Misc.getOppositeFace(state.getValue(BlockVacuum.facing)));
 		if (connections.size() > 0){
 			for (int i = 0; i < 1; i ++){
-				if (!inventory.getStackInSlot(0).isEmpty()){
+				if (!stackEmpty(inventory.getStackInSlot(0))){
 					EnumFacing face = connections.get(random.nextInt(connections.size()));
 					TileEntity tile = getWorld().getTileEntity(getPos().offset(face));
 					if (tile != null){
@@ -177,20 +181,20 @@ public class TileEntityItemVacuum extends TileEntity implements ITileEntityBase,
 							}
 							int slot = -1;
 							for (int j = 0; j < handler.getSlots() && slot == -1; j ++){
-								if (handler.getStackInSlot(j).isEmpty()){
+								if (stackEmpty(handler.getStackInSlot(j))){
 									slot = j;
 								}
 								else {
-									if (handler.getStackInSlot(j).getCount() < handler.getSlotLimit(j) && ItemStack.areItemsEqual(handler.getStackInSlot(j), inventory.getStackInSlot(0)) && ItemStack.areItemStackTagsEqual(handler.getStackInSlot(j), inventory.getStackInSlot(0))){
+									if (ItemUtil.slotFull(handler, j) && ItemStack.areItemsEqual(handler.getStackInSlot(j), inventory.getStackInSlot(0)) && ItemStack.areItemStackTagsEqual(handler.getStackInSlot(j), inventory.getStackInSlot(0))){
 										slot = j;
 									}
 								}
 							}
 							if (slot != -1){
 								ItemStack added = handler.insertItem(slot, passStack, false);
-								if (added.isEmpty()){
+								if (stackEmpty(added)){
 									ItemStack extracted = this.inventory.extractItem(0, 1, false);
-									if (!extracted.isEmpty()){
+									if (!stackEmpty(extracted)){
 										if (tile instanceof TileEntityItemPipe){
 											((TileEntityItemPipe)tile).lastReceived = getPos();
 										}

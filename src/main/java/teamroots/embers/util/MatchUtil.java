@@ -1,5 +1,7 @@
 package teamroots.embers.util;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,10 +35,10 @@ public class MatchUtil {
 	}
 	
 	public static boolean areStacksEqualOreDict(ItemStack stack1, ItemStack stack2){
-		if (stack1.isEmpty() && stack2.isEmpty()){
+		if (stackEmpty(stack1) && stackEmpty(stack2)){
 			return true;
 		}
-		else if (stack1.isEmpty() && !stack2.isEmpty() || stack2.isEmpty() && !stack1.isEmpty()){
+		else if (stackEmpty(stack1) && !stackEmpty(stack2) || stackEmpty(stack2) && !stackEmpty(stack1)){
 			return false;
 		}
 		else {

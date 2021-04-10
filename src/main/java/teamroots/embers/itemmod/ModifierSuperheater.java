@@ -1,5 +1,8 @@
 package teamroots.embers.itemmod;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +18,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageSuperheatFX;
 import teamroots.embers.util.EmberInventoryUtil;
 import teamroots.embers.util.ItemModUtil;
+import teamroots.embers.util.ItemUtil;
 
 public class ModifierSuperheater extends ModifierBase {
 
@@ -26,7 +30,7 @@ public class ModifierSuperheater extends ModifierBase {
 	@SubscribeEvent
 	public void onDrops(HarvestDropsEvent event){
 		if (event.getHarvester() instanceof EntityPlayer){
-			if (!event.getHarvester().getHeldItem(EnumHand.MAIN_HAND).isEmpty()){
+			if (!stackEmpty(event.getHarvester().getHeldItem(EnumHand.MAIN_HAND))){
 				ItemStack s = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
 				if (ItemModUtil.hasHeat(s)){
 					if (ItemModUtil.getModifierLevel(s, ItemModUtil.modifierRegistry.get(RegistryManager.superheater).name) > 0 && EmberInventoryUtil.getEmberTotal(event.getHarvester()) >= cost){
@@ -37,9 +41,9 @@ public class ModifierSuperheater extends ModifierBase {
 						List<ItemStack> stacks = event.getDrops();
 						for (int i = 0; i < stacks.size(); i ++){
 							ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(stacks.get(i)).copy();
-							if (!stack.isEmpty()){
+							if (!stackEmpty(stack)){
 								stacks.add(stack);
-								stacks.set(i, ItemStack.EMPTY);
+								stacks.set(i, EMPTY_ITEM_STACK);
 							}
 						}
 					}
@@ -53,7 +57,7 @@ public class ModifierSuperheater extends ModifierBase {
 		if (event.getSource().getEntity() instanceof EntityPlayer){
 			EntityPlayer damager = (EntityPlayer)event.getSource().getEntity();
 			ItemStack s = damager.getHeldItemMainhand();
-			if (!s.isEmpty()){
+			if (!stackEmpty(s)){
 				if (ItemModUtil.hasHeat(s)){
 					int superheatLevel = ItemModUtil.getModifierLevel(s, ItemModUtil.modifierRegistry.get(RegistryManager.superheater).name);
 					if (superheatLevel > 0 && EmberInventoryUtil.getEmberTotal(damager) >= cost){

@@ -67,7 +67,7 @@ public class BlockEmberEmitter extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		TileEntity t = world.getTileEntity(pos);
 		if (t instanceof TileEntityEmitter){
 			((TileEntityEmitter)t).updateNeighbors(world);

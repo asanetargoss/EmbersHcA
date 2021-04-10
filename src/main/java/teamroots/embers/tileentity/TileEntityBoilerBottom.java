@@ -1,5 +1,8 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -20,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
@@ -36,6 +38,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageEmberActivationFX;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityBoilerBottom extends TileFluidHandler implements ITileEntityBase, ITickable {
@@ -103,12 +106,13 @@ public class TileEntityBoilerBottom extends TileFluidHandler implements ITileEnt
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
 		if (heldItem.getItem() instanceof ItemBucket || heldItem.getItem() instanceof UniversalBucket){
-			FluidActionResult didFill = FluidUtil.interactWithFluidHandler(heldItem, this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side), player);
-			if (didFill.success){
-				player.setHeldItem(hand, didFill.getResult());
+			boolean didFill = FluidUtil.interactWithFluidHandler(heldItem, this.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side), player);
+			if (didFill){
+			    // 1.11-specific
+				//player.setHeldItem(hand, didFill.getResult());
 			}
 			this.markDirty();
-			return didFill.success;
+			return didFill;
 		}
 		return false;
 	}
@@ -161,7 +165,7 @@ public class TileEntityBoilerBottom extends TileFluidHandler implements ITileEnt
 	@Override
 	public void update() {
 		TileEntity tile = getWorld().getTileEntity(getPos().up());
-		if (!inventory.getStackInSlot(0).isEmpty()){
+		if (!stackEmpty(inventory.getStackInSlot(0))){
 			if (tank.getFluid() != null){
 				if (tank.getFluid().getFluid() == FluidRegistry.WATER && tank.getFluidAmount() > 25){
 					if (tile instanceof TileEntityBoilerTop){
@@ -172,7 +176,7 @@ public class TileEntityBoilerBottom extends TileFluidHandler implements ITileEnt
 								progress = 0;
 								int i = random.nextInt(inventory.getSlots());
 								if (inventory != null){
-									if (inventory.getStackInSlot(i) != ItemStack.EMPTY){
+									if (inventory.getStackInSlot(i) != EMPTY_ITEM_STACK){
 										if (EmberGenUtil.getEmberForItem(inventory.getStackInSlot(i).getItem()) > 0){
 											double ember = EmberGenUtil.getEmberForItem(inventory.getStackInSlot(i).getItem())*getMultiplier();
 											if (top.capability.getEmber() <= top.capability.getEmberCapacity()-ember){

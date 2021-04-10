@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.List;
 import java.util.Random;
 
@@ -31,6 +33,7 @@ import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.power.EmberCapabilityProvider;
 import teamroots.embers.power.IEmberCapability;
+import teamroots.embers.util.ItemUtil;
 
 public class TileEntityHeatCoil extends TileEntity implements ITileEntityBase, ITickable, IMultiblockMachine {
 	public IEmberCapability capability = new DefaultEmberCapability();
@@ -157,15 +160,15 @@ public class TileEntityHeatCoil extends TileEntity implements ITileEntityBase, I
 				}
 				if (items.size() > 0){
 					int i = random.nextInt(items.size());
-					if (FurnaceRecipes.instance().getSmeltingResult(items.get(i).getEntityItem()) != ItemStack.EMPTY){
+					if (FurnaceRecipes.instance().getSmeltingResult(items.get(i).getEntityItem()) != EMPTY_ITEM_STACK){
 						ItemStack recipeStack = new ItemStack(items.get(i).getEntityItem().getItem(),1,items.get(i).getEntityItem().getMetadata());
 						if (items.get(i).getEntityItem().hasTagCompound()){
 							recipeStack.setTagCompound(items.get(i).getEntityItem().getTagCompound());
 						}
 						ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(recipeStack).copy();
 						ItemStack remainder = inventory.insertItem(0, stack, false);
-						items.get(i).getEntityItem().shrink(1);
-						if (items.get(i).getEntityItem().getCount() == 0){
+						items.get(i).getEntityItem().stackSize -= 1; // TODO: This looks dangerous
+						if (items.get(i).getEntityItem().stackSize == 0){
 							items.get(i).setDead();
 							for (int j = 0; j < 3; j ++){
 								if (random.nextBoolean()){
@@ -179,7 +182,7 @@ public class TileEntityHeatCoil extends TileEntity implements ITileEntityBase, I
 						}
 						markDirty();
 						IBlockState state = getWorld().getBlockState(getPos());
-						if (remainder != ItemStack.EMPTY){
+						if (remainder != EMPTY_ITEM_STACK){
 							getWorld().spawnEntity(new EntityItem(getWorld(),items.get(i).posX,items.get(i).posY,items.get(i).posZ,remainder));
 						}
 					}

@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -19,6 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 import teamroots.embers.block.BlockStampBase;
 import teamroots.embers.util.FluidTextureUtil;
+import teamroots.embers.util.ItemUtil;
 
 public class TileEntityStampBaseRenderer extends TileEntitySpecialRenderer {
 	int blue, green, red, alpha;
@@ -109,7 +112,7 @@ public class TileEntityStampBaseRenderer extends TileEntitySpecialRenderer {
 						GlStateManager.enableCull();
 		            }
 				}
-				if (tank.inputs.getStackInSlot(0) != ItemStack.EMPTY){
+				if (tank.inputs.getStackInSlot(0) != EMPTY_ITEM_STACK){
 					GL11.glPushMatrix();
 					EntityItem item = new EntityItem(Minecraft.getMinecraft().world,x,y,z,new ItemStack(tank.inputs.getStackInSlot(0).getItem(),1,tank.inputs.getStackInSlot(0).getMetadata()));
 					item.hoverStart = 0;

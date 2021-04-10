@@ -1,5 +1,7 @@
 package teamroots.embers.recipe;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +24,7 @@ import teamroots.embers.ConfigManager;
 import teamroots.embers.Embers;
 import teamroots.embers.RegistryManager;
 import teamroots.embers.item.EnumStampType;
+import teamroots.embers.util.ItemUtil;
 
 public class RecipeRegistry {
 	public static ArrayList<ItemMeltingRecipe> meltingRecipes = new ArrayList<ItemMeltingRecipe>();
@@ -1015,48 +1018,48 @@ public class RecipeRegistry {
 			meltingOreRecipes.add(new ItemMeltingOreRecipe("plateElectrum",new FluidStack(RegistryManager.fluid_molten_electrum,144)));
 		}
 		
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_iron,144),EnumStampType.TYPE_BAR,new ItemStack(Items.IRON_INGOT,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_gold,144),EnumStampType.TYPE_BAR,new ItemStack(Items.GOLD_INGOT,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_lead,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_lead,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_silver,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_silver,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_copper,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_copper,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_dawnstone,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_dawnstone,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_iron,144),EnumStampType.TYPE_BAR,new ItemStack(Items.IRON_INGOT,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_gold,144),EnumStampType.TYPE_BAR,new ItemStack(Items.GOLD_INGOT,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_lead,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_lead,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_silver,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_silver,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_copper,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_copper,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_dawnstone,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_dawnstone,1),false,false));
 		if (ConfigManager.enableAluminum){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_aluminum,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_aluminum,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_aluminum,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_aluminum,1),false,false));
 		}
 		if (ConfigManager.enableBronze){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_bronze,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_bronze,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_bronze,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_bronze,1),false,false));
 		}
 		if (ConfigManager.enableElectrum){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_electrum,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_electrum,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_electrum,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_electrum,1),false,false));
 		}
 		if (ConfigManager.enableNickel){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_nickel,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_nickel,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_nickel,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_nickel,1),false,false));
 		}
 		if (ConfigManager.enableTin){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_tin,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_tin,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_tin,144),EnumStampType.TYPE_BAR,new ItemStack(RegistryManager.ingot_tin,1),false,false));
 		}
 		
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_iron,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_iron,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_gold,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_gold,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_lead,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_lead,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_silver,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_silver,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_copper,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_copper,1),false,false));
-		stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_dawnstone,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_dawnstone,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_iron,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_iron,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_gold,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_gold,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_lead,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_lead,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_silver,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_silver,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_copper,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_copper,1),false,false));
+		stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_dawnstone,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_dawnstone,1),false,false));
 		if (ConfigManager.enableAluminum){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_aluminum,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_aluminum,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_aluminum,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_aluminum,1),false,false));
 		}
 		if (ConfigManager.enableBronze){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_bronze,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_bronze,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_bronze,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_bronze,1),false,false));
 		}
 		if (ConfigManager.enableElectrum){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_electrum,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_electrum,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_electrum,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_electrum,1),false,false));
 		}
 		if (ConfigManager.enableNickel){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_nickel,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_nickel,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_nickel,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_nickel,1),false,false));
 		}
 		if (ConfigManager.enableTin){	
-			stampingRecipes.add(new ItemStampingRecipe(ItemStack.EMPTY,new FluidStack(RegistryManager.fluid_molten_tin,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_tin,1),false,false));
+			stampingRecipes.add(new ItemStampingRecipe(EMPTY_ITEM_STACK,new FluidStack(RegistryManager.fluid_molten_tin,144),EnumStampType.TYPE_PLATE,new ItemStack(RegistryManager.plate_tin,1),false,false));
 		}
 		stampingRecipes.add(new ItemWasteStampingRecipe());
 		
@@ -1082,8 +1085,8 @@ public class RecipeRegistry {
 		alchemyRecipes.add(new AlchemyRecipe(12, 24, 0, 0, 0, 0, 0, 0, 12, 24, new ItemStack(Blocks.WOOL), new ItemStack(RegistryManager.dust_ash), new ItemStack(RegistryManager.dust_ash), new ItemStack(Items.STRING), new ItemStack(Items.STRING), new ItemStack(RegistryManager.ashen_cloth,2)));
 		alchemyRecipes.add(new AlchemyRecipe(0, 0, 32, 48, 0, 0, 0, 0, 24, 40, new ItemStack(Items.DIAMOND), new ItemStack(RegistryManager.ingot_dawnstone), new ItemStack(Items.COAL), new ItemStack(Items.COAL), new ItemStack(Items.COAL), new ItemStack(RegistryManager.inflictor_gem,1)));
 		alchemyRecipes.add(new AlchemyRecipe(0, 0, 64, 80, 0, 0, 0, 0, 0, 0, new ItemStack(Items.QUARTZ), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.GUNPOWDER), new ItemStack(RegistryManager.shard_ember), new ItemStack(RegistryManager.shard_ember), new ItemStack(RegistryManager.glimmer_shard,1)));
-		alchemyRecipes.add(new AlchemyRecipe(24, 36, 0, 0, 0, 0, 0, 0, 0, 0, new ItemStack(Items.IRON_INGOT), new ItemStack(Items.QUARTZ), new ItemStack(Items.CLAY_BALL), new ItemStack(Items.DYE,1,4), ItemStack.EMPTY, new ItemStack(RegistryManager.isolated_materia,4)));
-		alchemyRecipes.add(new AlchemyRecipe(12, 18, 0, 0, 0, 0, 0, 0, 0, 0, new ItemStack(Items.CLAY_BALL), new ItemStack(Items.DYE,1,15), new ItemStack(Items.DYE,1,15), ItemStack.EMPTY, ItemStack.EMPTY, new ItemStack(RegistryManager.adhesive,6)));
+		alchemyRecipes.add(new AlchemyRecipe(24, 36, 0, 0, 0, 0, 0, 0, 0, 0, new ItemStack(Items.IRON_INGOT), new ItemStack(Items.QUARTZ), new ItemStack(Items.CLAY_BALL), new ItemStack(Items.DYE,1,4), EMPTY_ITEM_STACK, new ItemStack(RegistryManager.isolated_materia,4)));
+		alchemyRecipes.add(new AlchemyRecipe(12, 18, 0, 0, 0, 0, 0, 0, 0, 0, new ItemStack(Items.CLAY_BALL), new ItemStack(Items.DYE,1,15), new ItemStack(Items.DYE,1,15), EMPTY_ITEM_STACK, EMPTY_ITEM_STACK, new ItemStack(RegistryManager.adhesive,6)));
 		alchemyRecipes.add(new AlchemyRecipe(0, 0, 0, 0, 8, 16, 0, 0, 0, 0, new ItemStack(Items.REDSTONE), new ItemStack(RegistryManager.dust_ash), new ItemStack(RegistryManager.dust_ash), new ItemStack(Blocks.COBBLESTONE,1), new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK,2)));
 		alchemyRecipes.add(new AlchemyRecipe(0, 0, 0, 0, 8, 16, 0, 0, 0, 0, new ItemStack(RegistryManager.dust_ash), new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND), new ItemStack(Blocks.SOUL_SAND,4)));
 		alchemyRecipes.add(new AlchemyRecipe(0, 0, 0, 0, 0, 0, 64, 96, 64, 96, new ItemStack(RegistryManager.sword_lead,1), new ItemStack(Blocks.COAL_BLOCK), new ItemStack(Blocks.OBSIDIAN), new ItemStack(RegistryManager.ingot_lead), new ItemStack(RegistryManager.ingot_lead), new ItemStack(RegistryManager.tyrfing,1)));
@@ -1169,16 +1172,16 @@ public class RecipeRegistry {
 	
 	public static AlchemyRecipe getAlchemyRecipe(ItemStack center, ItemStack stack1, ItemStack stack2, ItemStack stack3, ItemStack stack4){
 		List<ItemStack> list = new ArrayList<ItemStack>();
-		if (stack1 != ItemStack.EMPTY){
+		if (stack1 != EMPTY_ITEM_STACK){
 			list.add(stack1);
 		}
-		if (stack2 != ItemStack.EMPTY){
+		if (stack2 != EMPTY_ITEM_STACK){
 			list.add(stack2);
 		}
-		if (stack3 != ItemStack.EMPTY){
+		if (stack3 != EMPTY_ITEM_STACK){
 			list.add(stack3);
 		}
-		if (stack4 != ItemStack.EMPTY){
+		if (stack4 != EMPTY_ITEM_STACK){
 			list.add(stack4);
 		}
 		for (int i = 0; i < alchemyRecipes.size(); i ++){

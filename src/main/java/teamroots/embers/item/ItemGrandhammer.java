@@ -87,10 +87,11 @@ public class ItemGrandhammer extends ItemTool implements IModeledItem, IEmberCha
 		return true;
 	}
 	
-	@Override
+	// 1.11-specific
+	/*@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchant){
 		return enchant.type == EnumEnchantmentType.WEAPON || enchant.type == EnumEnchantmentType.DIGGER;
-	}
+	}*/
 	
 	@Override
 	public boolean canHarvestBlock(IBlockState state, ItemStack stack){

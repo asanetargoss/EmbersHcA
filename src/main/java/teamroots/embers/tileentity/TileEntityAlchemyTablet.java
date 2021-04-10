@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,6 +35,7 @@ import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.power.IEmberCapability;
 import teamroots.embers.recipe.AlchemyRecipe;
 import teamroots.embers.recipe.RecipeRegistry;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityAlchemyTablet extends TileEntity implements ITileEntityBase, ITickable {
@@ -220,15 +223,15 @@ public class TileEntityAlchemyTablet extends TileEntity implements ITileEntityBa
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem != ItemStack.EMPTY){
+		if (heldItem != EMPTY_ITEM_STACK){
 			player.setHeldItem(hand, getInventoryForFace(side).insertItem(0,heldItem,false));
 			markDirty();
 			return true;
 		}
 		else {
-			if (getInventoryForFace(side).getStackInSlot(0) != ItemStack.EMPTY){
+			if (getInventoryForFace(side).getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (!getWorld().isRemote){
-					player.setHeldItem(hand, getInventoryForFace(side).extractItem(0, getInventoryForFace(side).getStackInSlot(0).getCount(), false));
+					player.setHeldItem(hand, getInventoryForFace(side).extractItem(0, getInventoryForFace(side).getStackInSlot(0).stackSize, false));
 					markDirty();
 				}
 				return true;
@@ -264,8 +267,8 @@ public class TileEntityAlchemyTablet extends TileEntity implements ITileEntityBa
 	public int getNearbyAsh(List<TileEntityAlchemyPedestal> pedestals){
 		int count = 0;
 		for (TileEntityAlchemyPedestal pedestal : pedestals){
-			if (pedestal.inventory.getStackInSlot(0) != ItemStack.EMPTY){
-				count += pedestal.inventory.getStackInSlot(0).getCount();
+			if (pedestal.inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
+				count += pedestal.inventory.getStackInSlot(0).stackSize;
 			}
 		}
 		return count;
@@ -294,10 +297,10 @@ public class TileEntityAlchemyTablet extends TileEntity implements ITileEntityBa
 			if (angle % 10 == 0){
 				if (getNearbyAsh(pedestals) > 0){
 					TileEntityAlchemyPedestal pedestal = pedestals.get(random.nextInt(pedestals.size()));
-					while (pedestal.inventory.extractItem(0, 1, true) == ItemStack.EMPTY){
+					while (pedestal.inventory.extractItem(0, 1, true) == EMPTY_ITEM_STACK){
 						pedestal = pedestals.get(random.nextInt(pedestals.size()));
 					}
-					if (pedestal.inventory.getStackInSlot(1) != ItemStack.EMPTY){
+					if (pedestal.inventory.getStackInSlot(1) != EMPTY_ITEM_STACK){
 						if (getWorld().isRemote){
 							for (int j = 0; j < 20; j ++){
 								float dx = (getPos().getX()+0.5f) - (pedestal.getPos().getX()+0.5f);
@@ -359,10 +362,10 @@ public class TileEntityAlchemyTablet extends TileEntity implements ITileEntityBa
 	}
 	
 	public ItemStack decrStack(ItemStack stack){
-		if (stack != ItemStack.EMPTY){
-			stack.shrink(1);
-			if (stack.getCount() == 0){
-				return ItemStack.EMPTY;
+		if (stack != EMPTY_ITEM_STACK){
+			stack.stackSize--; // TODO: This looks dangerous
+			if (stack.stackSize == 0){
+				return EMPTY_ITEM_STACK;
 			}
 		}
 		return stack;

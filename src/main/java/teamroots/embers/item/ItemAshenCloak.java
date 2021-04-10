@@ -1,5 +1,7 @@
 package teamroots.embers.item;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.List;
 
 import net.minecraft.client.model.ModelBiped;
@@ -48,8 +50,8 @@ public class ItemAshenCloak extends ItemArmorBase {
 		float mult = 0.0f;
 		for (int i = 1; i < 8; i ++){
 			if (stack.hasTagCompound()){
-				ItemStack gem = new ItemStack(stack.getTagCompound().getCompoundTag("gem"+i));
-				if (gem != ItemStack.EMPTY){
+				ItemStack gem = ItemStack.func_77949_a(stack.getTagCompound().getCompoundTag("gem"+i));
+				if (!stackEmpty(gem)){
 					if (gem.hasTagCompound()){
 						if (gem.getTagCompound().hasKey("type")){
 							if (gem.getTagCompound().getString("type").compareTo(source.getDamageType()) == 0){

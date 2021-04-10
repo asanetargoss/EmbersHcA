@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -28,6 +30,7 @@ import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.power.EmberCapabilityProvider;
 import teamroots.embers.power.IEmberCapability;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityCrystalCell extends TileEntity implements ITileEntityBase, ITickable, IMultiblockMachine {
@@ -133,16 +136,16 @@ public class TileEntityCrystalCell extends TileEntity implements ITileEntityBase
 	@Override
 	public void update() {
 		ticksExisted ++;
-		if (inventory.getStackInSlot(0) != ItemStack.EMPTY && ticksExisted % 4 == 0){
+		if (inventory.getStackInSlot(0) != EMPTY_ITEM_STACK && ticksExisted % 4 == 0){
 			ItemStack stack = inventory.extractItem(0, 1, true);
-			if (!getWorld().isRemote && stack != ItemStack.EMPTY){
+			if (!getWorld().isRemote && stack != EMPTY_ITEM_STACK){
 				inventory.extractItem(0, 1, false);
 				if (EmberGenUtil.getEmberForItem(stack.getItem()) > 0){
 					this.capability.setEmberCapacity(Math.min(1440000, this.capability.getEmberCapacity()+EmberGenUtil.getEmberForItem(stack.getItem())*10));
 					markDirty();
 				}
 			}
-			if (getWorld().isRemote && stack != ItemStack.EMPTY){
+			if (getWorld().isRemote && stack != EMPTY_ITEM_STACK){
 				double angle = random.nextDouble()*2.0*Math.PI;
 				double x = getPos().getX()+0.5+0.5*Math.sin(angle);
 				double z = getPos().getZ()+0.5+0.5*Math.cos(angle);

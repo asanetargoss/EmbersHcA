@@ -1,5 +1,7 @@
 package teamroots.embers.recipe;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import teamroots.embers.item.ItemAlchemicWaste;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.MatchUtil;
 
 public class AlchemyRecipe {
@@ -17,8 +20,8 @@ public class AlchemyRecipe {
 	public int ironAspectMin = 0, dawnstoneAspectMin = 0, copperAspectMin = 0, silverAspectMin = 0, leadAspectMin = 0;
 	public int ironAspectRange = 0, dawnstoneAspectRange = 0, copperAspectRange = 0, silverAspectRange = 0, leadAspectRange = 0;
 	public List<ItemStack> inputs = new ArrayList<ItemStack>();
-	public ItemStack centerInput = ItemStack.EMPTY;
-	public ItemStack result = ItemStack.EMPTY;
+	public ItemStack centerInput = EMPTY_ITEM_STACK;
+	public ItemStack result = EMPTY_ITEM_STACK;
 	public AlchemyRecipe(int ironMin, int ironMax, int dawnstoneMin, int dawnstoneMax, int copperMin, int copperMax, int silverMin, int silverMax, int leadMin, int leadMax, ItemStack center, ItemStack east, ItemStack west, ItemStack north, ItemStack south, ItemStack result){
 		this.ironAspectMin = ironMin;
 		this.ironAspectRange = ironMax-ironMin;
@@ -31,16 +34,16 @@ public class AlchemyRecipe {
 		this.leadAspectMin = leadMin;
 		this.leadAspectRange = leadMax-leadMin;
 		this.centerInput = center;
-		if (east != ItemStack.EMPTY){
+		if (east != EMPTY_ITEM_STACK){
 			inputs.add(east);
 		}
-		if (west != ItemStack.EMPTY){
+		if (west != EMPTY_ITEM_STACK){
 			inputs.add(west);
 		}
-		if (north != ItemStack.EMPTY){
+		if (north != EMPTY_ITEM_STACK){
 			inputs.add(north);
 		}
-		if (south != ItemStack.EMPTY){
+		if (south != EMPTY_ITEM_STACK){
 			inputs.add(south);
 		}
 		this.result = result;

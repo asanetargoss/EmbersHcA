@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
@@ -20,6 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import teamroots.embers.Embers;
 import teamroots.embers.EventManager;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.RenderUtil;
 
 public class TileEntityAlchemyTabletRenderer extends TileEntitySpecialRenderer implements ITileEntitySpecialRendererLater {
@@ -69,7 +72,7 @@ public class TileEntityAlchemyTabletRenderer extends TileEntitySpecialRenderer i
 				GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 			}
 			
-			if (tablet.center.getStackInSlot(0) != ItemStack.EMPTY){
+			if (tablet.center.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 					GL11.glPushMatrix();
@@ -90,7 +93,7 @@ public class TileEntityAlchemyTabletRenderer extends TileEntitySpecialRenderer i
 					GlStateManager.popAttrib();
 				}
 			}
-			if (tablet.north.getStackInSlot(0) != ItemStack.EMPTY){
+			if (tablet.north.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 					GL11.glPushMatrix();
@@ -111,7 +114,7 @@ public class TileEntityAlchemyTabletRenderer extends TileEntitySpecialRenderer i
 					GlStateManager.popAttrib();
 				}
 			}
-			if (tablet.south.getStackInSlot(0) != ItemStack.EMPTY){
+			if (tablet.south.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 					GL11.glPushMatrix();
@@ -132,7 +135,7 @@ public class TileEntityAlchemyTabletRenderer extends TileEntitySpecialRenderer i
 					GlStateManager.popAttrib();
 				}
 			}
-			if (tablet.west.getStackInSlot(0) != ItemStack.EMPTY){
+			if (tablet.west.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 					GL11.glPushMatrix();
@@ -153,7 +156,7 @@ public class TileEntityAlchemyTabletRenderer extends TileEntitySpecialRenderer i
 					GlStateManager.popAttrib();
 				}
 			}
-			if (tablet.east.getStackInSlot(0) != ItemStack.EMPTY){
+			if (tablet.east.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 					GL11.glPushMatrix();

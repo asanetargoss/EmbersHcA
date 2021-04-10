@@ -1,14 +1,17 @@
 package teamroots.embers.recipe;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import teamroots.embers.item.EnumStampType;
+import teamroots.embers.util.ItemUtil;
 
 public class ItemStampingOreRecipe {
 	private String ore = "";
 	private FluidStack fluid = null;
-	public ItemStack result = ItemStack.EMPTY;
+	public ItemStack result = EMPTY_ITEM_STACK;
 	private EnumStampType type = EnumStampType.TYPE_NULL;
 	boolean matchMetadata = false;
 	boolean matchNBT = false;

@@ -1,5 +1,7 @@
 package teamroots.embers.research;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +10,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.embers.util.ItemUtil;
 
 public class ResearchBase {
 	public String name = "";
 	public double v = 0;
-	public ItemStack icon = ItemStack.EMPTY;
+	public ItemStack icon = EMPTY_ITEM_STACK;
 	public int x = 0;
 	public int y = 0;
 	public List<ResearchBase> ancestors = new ArrayList<ResearchBase>();

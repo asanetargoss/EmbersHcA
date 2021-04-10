@@ -1,5 +1,7 @@
 package teamroots.embers.model;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -12,6 +14,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
+import teamroots.embers.util.ItemUtil;
 
 public class ModelArmorBase extends ModelBiped {
 	
@@ -297,7 +300,7 @@ public class ModelArmorBase extends ModelBiped {
 			ModelBiped.ArmPose mainPose = ArmPose.EMPTY;
 			ModelBiped.ArmPose offPose = ArmPose.EMPTY;
 
-			if(living.getHeldItemMainhand() != ItemStack.EMPTY) {
+			if(living.getHeldItemMainhand() != EMPTY_ITEM_STACK) {
 				mainPose = ArmPose.ITEM;
 				if (living.getItemInUseCount() > 0) {
 					EnumAction enumaction = living.getHeldItemMainhand().getItemUseAction();
@@ -310,7 +313,7 @@ public class ModelArmorBase extends ModelBiped {
 				}
 			}
 
-			if (living.getHeldItemOffhand() != ItemStack.EMPTY) {
+			if (living.getHeldItemOffhand() != EMPTY_ITEM_STACK) {
 				offPose = ModelBiped.ArmPose.ITEM;
 
 				if (living.getItemInUseCount() > 0) {

@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -23,6 +25,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import teamroots.embers.EventManager;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdate;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityDropper extends TileEntity implements ITileEntityBase, ITickable {
@@ -111,7 +114,7 @@ public class TileEntityDropper extends TileEntity implements ITileEntityBase, IT
 
 	@Override
 	public void update() {
-		if (!inventory.getStackInSlot(0).isEmpty() && !getWorld().isRemote){
+		if (!stackEmpty(inventory.getStackInSlot(0)) && !getWorld().isRemote){
 			ItemStack stack = inventory.extractItem(0, 1, false);
 			EntityItem item = new EntityItem(getWorld(),getPos().getX()+0.5,getPos().getY(),getPos().getZ()+0.5,stack);
 			item.motionX = 0;

@@ -416,7 +416,7 @@ public class RegistryManager {
 		tool_mat_dawnstone.setRepairItem(new ItemStack(ingot_dawnstone));
 		tool_mat_tyrfing.setRepairItem(new ItemStack(dust_ash));
 		
-		armor_mat_ashen_cloak.repairMaterial = new ItemStack(ashen_cloth,1);
+		armor_mat_ashen_cloak.customCraftingMaterial = ashen_cloth;
 		
 		/*
 		items.add(ingotAstralite = new ItemBase("ingotAstralite",true));
@@ -482,11 +482,11 @@ public class RegistryManager {
 		
 		int id = 0;
 		
-		EntityRegistry.registerModEntity(new ResourceLocation(Embers.MODID+":ember_packet"),EntityEmberPacket.class, "ember_packet", id++, Embers.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Embers.MODID+":ember_projectile"),EntityEmberProjectile.class, "ember_projectile", id++, Embers.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Embers.MODID+":ancient_golem"),EntityAncientGolem.class, "ancient_golem", id++, Embers.instance, 64, 1, true);
-		EntityRegistry.registerEgg(new ResourceLocation(Embers.MODID+":ancient_golem"), Misc.intColor(48, 38, 35), Misc.intColor(79, 66, 61));
-		EntityRegistry.registerModEntity(new ResourceLocation(Embers.MODID+":ember_light"),EntityEmberLight.class, "ember_light", id++, Embers.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityEmberPacket.class, "ember_packet", id++, Embers.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityEmberProjectile.class, "ember_projectile", id++, Embers.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityAncientGolem.class, "ancient_golem", id++, Embers.instance, 64, 1, true);
+		EntityRegistry.registerEgg(EntityAncientGolem.class, Misc.intColor(48, 38, 35), Misc.intColor(79, 66, 61));
+		EntityRegistry.registerModEntity(EntityEmberLight.class, "ember_light", id++, Embers.instance, 64, 1, true);
 		
 		List<BiomeEntry> biomeEntries = new ArrayList<BiomeEntry>();
 		biomeEntries.addAll(BiomeManager.getBiomes(BiomeType.COOL));

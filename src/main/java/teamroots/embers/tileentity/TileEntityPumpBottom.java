@@ -155,13 +155,13 @@ public class TileEntityPumpBottom extends TileEntity implements ITileEntityBase,
 						t.markDirty();
 						world.setBlockToAir(pos);
 						world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
-						world.notifyNeighborsOfStateChange(pos.north(), Blocks.AIR, true);
-						world.notifyNeighborsOfStateChange(pos.south(), Blocks.AIR, true);
-						world.notifyNeighborsOfStateChange(pos.east(), Blocks.AIR, true);
-						world.notifyNeighborsOfStateChange(pos.west(), Blocks.AIR, true);
-						world.notifyNeighborsOfStateChange(pos.up(), Blocks.AIR, true);
-						world.notifyNeighborsOfStateChange(pos.down(), Blocks.AIR, true);
-						world.notifyNeighborsOfStateChange(pos, Blocks.AIR, true);
+						world.notifyNeighborsOfStateChange(pos.north(), Blocks.AIR);
+						world.notifyNeighborsOfStateChange(pos.south(), Blocks.AIR);
+						world.notifyNeighborsOfStateChange(pos.east(), Blocks.AIR);
+						world.notifyNeighborsOfStateChange(pos.west(), Blocks.AIR);
+						world.notifyNeighborsOfStateChange(pos.up(), Blocks.AIR);
+						world.notifyNeighborsOfStateChange(pos.down(), Blocks.AIR);
+						world.notifyNeighborsOfStateChange(pos, Blocks.AIR);
 						return false;
 					}
 				}

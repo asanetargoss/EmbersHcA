@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -25,6 +27,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageEmberActivationFX;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityCombustor extends TileEntity implements ITileEntityBase, ITickable {
@@ -123,7 +126,7 @@ public class TileEntityCombustor extends TileEntity implements ITileEntityBase, 
 			}
 			markDirty();
 		}
-		if (progress == 0 && !inventory.getStackInSlot(0).isEmpty()){
+		if (progress == 0 && !stackEmpty(inventory.getStackInSlot(0))){
 			if (EmberGenUtil.getFuelCoefficient(inventory.getStackInSlot(0).getItem()) > 0){
 				multiplier = EmberGenUtil.getFuelCoefficient(inventory.getStackInSlot(0).getItem());
 				progress = 400;

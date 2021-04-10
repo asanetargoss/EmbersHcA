@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
@@ -13,6 +15,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import teamroots.embers.util.ItemUtil;
 
 public class TileEntityItemTransferRenderer extends TileEntitySpecialRenderer {
 	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
@@ -25,7 +28,7 @@ public class TileEntityItemTransferRenderer extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks, int destroyStage){
 		if (tile instanceof TileEntityItemTransfer){
 			TileEntityItemTransfer transfer = (TileEntityItemTransfer)tile;
-			if (transfer.filterItem != ItemStack.EMPTY){
+			if (transfer.filterItem != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();
 		            GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);

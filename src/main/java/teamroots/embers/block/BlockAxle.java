@@ -54,7 +54,7 @@ public class BlockAxle extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		TileEntityAxle p = (TileEntityAxle)world.getTileEntity(pos);
 		p.updateNeighbors();
 		p.markDirty();

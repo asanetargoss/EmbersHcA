@@ -1,5 +1,7 @@
 package teamroots.embers.itemmod;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,7 @@ import teamroots.embers.network.message.MessageSuperheatFX;
 import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.util.EmberInventoryUtil;
 import teamroots.embers.util.ItemModUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class ModifierIntelligentApparatus extends ModifierBase {
@@ -49,7 +52,7 @@ public class ModifierIntelligentApparatus extends ModifierBase {
 		if (event.getAttackingPlayer() != null){
 			EntityPlayer player = (EntityPlayer)event.getAttackingPlayer();
 			ItemStack s = player.getHeldItemMainhand();
-			if (!s.isEmpty()){
+			if (!stackEmpty(s)){
 				if (ItemModUtil.hasHeat(s)){
 					int level = ItemModUtil.getModifierLevel(s, ItemModUtil.modifierRegistry.get(RegistryManager.superheater).name);
 					if (level > 0 && EmberInventoryUtil.getEmberTotal(player) >= cost){

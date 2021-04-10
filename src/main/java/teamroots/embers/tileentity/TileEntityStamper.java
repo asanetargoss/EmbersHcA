@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -34,6 +36,7 @@ import teamroots.embers.power.IEmberCapability;
 import teamroots.embers.recipe.ItemStampingOreRecipe;
 import teamroots.embers.recipe.ItemStampingRecipe;
 import teamroots.embers.recipe.RecipeRegistry;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityStamper extends TileEntity implements ITileEntityBase, ITickable {
@@ -49,7 +52,7 @@ public class TileEntityStamper extends TileEntity implements ITileEntityBase, IT
         }
         
         @Override
-        public int getSlotLimit(int slot){
+        public int getStackLimit(int slot, ItemStack stack){
         	return 1;
         }
 	};
@@ -96,9 +99,9 @@ public class TileEntityStamper extends TileEntity implements ITileEntityBase, IT
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem != ItemStack.EMPTY){
+		if (heldItem != EMPTY_ITEM_STACK){
 			if (EnumStampType.getType(heldItem) != EnumStampType.TYPE_NULL){
-				if (stamp.getStackInSlot(0) == ItemStack.EMPTY){
+				if (stamp.getStackInSlot(0) == EMPTY_ITEM_STACK){
 					ItemStack newStack = new ItemStack(heldItem.getItem(),1,heldItem.getMetadata());
 					if (heldItem.hasTagCompound()){
 						newStack.setTagCompound(heldItem.getTagCompound());
@@ -110,9 +113,9 @@ public class TileEntityStamper extends TileEntity implements ITileEntityBase, IT
 			}
 		}
 		else {
-			if (stamp.getStackInSlot(0) != ItemStack.EMPTY && !world.isRemote){
+			if (stamp.getStackInSlot(0) != EMPTY_ITEM_STACK && !world.isRemote){
 				world.spawnEntity(new EntityItem(world,player.posX,player.posY,player.posZ,stamp.getStackInSlot(0)));
-				stamp.setStackInSlot(0, ItemStack.EMPTY);
+				stamp.setStackInSlot(0, EMPTY_ITEM_STACK);
 				markDirty();
 				return true;
 			}
@@ -149,8 +152,8 @@ public class TileEntityStamper extends TileEntity implements ITileEntityBase, IT
 							}
 							powered = true;
 							ItemStack result = recipe.getResult(stamp.inputs.getStackInSlot(0), stamp.getFluid() != null ? new FluidStack(stamp.getFluid(), stamp.getAmount()) : null,EnumStampType.getType(this.stamp.getStackInSlot(0))).copy();
-							if (recipe.getStack() != ItemStack.EMPTY){
-								stamp.inputs.extractItem(0, recipe.getStack().getCount(), false);
+							if (recipe.getStack() != EMPTY_ITEM_STACK){
+								stamp.inputs.extractItem(0, recipe.getStack().stackSize, false);
 							}
 							if (recipe.getFluid() != null){
 								stamp.getTank().drain(recipe.getFluid(), true);
@@ -159,7 +162,7 @@ public class TileEntityStamper extends TileEntity implements ITileEntityBase, IT
 							if (getWorld().getTileEntity(getPos().offset(face,3)) instanceof TileEntityBin){
 								TileEntityBin bin = (TileEntityBin)getWorld().getTileEntity(getPos().offset(face,3));
 								ItemStack remainder = bin.inventory.insertItem(0, result, false);
-								if (remainder != ItemStack.EMPTY && !getWorld().isRemote){
+								if (remainder != EMPTY_ITEM_STACK && !getWorld().isRemote){
 									EntityItem item = new EntityItem(getWorld(),off.getX()+0.5,off.getY()+0.5,off.getZ()+0.5,remainder);
 									getWorld().spawnEntity(item);
 								}
@@ -191,7 +194,7 @@ public class TileEntityStamper extends TileEntity implements ITileEntityBase, IT
 							if (getWorld().getTileEntity(getPos().offset(face,3)) instanceof TileEntityBin){
 								TileEntityBin bin = (TileEntityBin)getWorld().getTileEntity(getPos().offset(face,3));
 								ItemStack remainder = bin.inventory.insertItem(0, result, false);
-								if (remainder != ItemStack.EMPTY && !getWorld().isRemote){
+								if (remainder != EMPTY_ITEM_STACK && !getWorld().isRemote){
 									EntityItem item = new EntityItem(getWorld(),off.getX()+0.5,off.getY()+0.5,off.getZ()+0.5,remainder);
 									getWorld().spawnEntity(item);
 								}

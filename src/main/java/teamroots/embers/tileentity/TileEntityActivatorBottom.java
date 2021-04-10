@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -25,6 +27,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageEmberActivationFX;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityActivatorBottom extends TileEntity implements ITileEntityBase, ITickable {
@@ -113,7 +116,7 @@ public class TileEntityActivatorBottom extends TileEntity implements ITileEntity
 
 	@Override
 	public void update() {
-		if (!inventory.getStackInSlot(0).isEmpty()){
+		if (!stackEmpty(inventory.getStackInSlot(0))){
 			TileEntity tile = getWorld().getTileEntity(getPos().up());
 			if (tile instanceof TileEntityActivatorTop){
 				TileEntityActivatorTop top = (TileEntityActivatorTop)tile;

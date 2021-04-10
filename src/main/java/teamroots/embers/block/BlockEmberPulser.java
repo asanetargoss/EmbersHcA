@@ -68,7 +68,7 @@ public class BlockEmberPulser extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		TileEntity t = world.getTileEntity(pos);
 		if (t instanceof TileEntityPulser){
 			((TileEntityPulser)t).updateNeighbors(world);

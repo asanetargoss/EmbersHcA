@@ -1,10 +1,13 @@
 package teamroots.embers.recipe;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import teamroots.embers.util.ItemUtil;
 
 public class ItemMeltingRecipe {
-	private ItemStack stack = ItemStack.EMPTY;
+	private ItemStack stack = EMPTY_ITEM_STACK;
 	private FluidStack fluid = null;
 	boolean matchMetadata = false;
 	boolean matchNBT = false;

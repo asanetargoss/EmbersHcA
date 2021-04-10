@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -18,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import teamroots.embers.util.FluidTextureUtil;
+import teamroots.embers.util.ItemUtil;
 
 public class TileEntityFurnaceTopRenderer extends TileEntitySpecialRenderer {
 	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
@@ -38,7 +41,7 @@ public class TileEntityFurnaceTopRenderer extends TileEntitySpecialRenderer {
             GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 			for (int i = 0; i < furnace.inventory.getSlots(); i ++){
 				ItemStack stack = furnace.inventory.getStackInSlot(i);
-				if (stack != ItemStack.EMPTY){
+				if (stack != EMPTY_ITEM_STACK){
 					GlStateManager.pushMatrix();
 					GlStateManager.translate(x+0.5,y,z+0.5);
 					GlStateManager.rotate(1.0f*((float)furnace.angle+partialTicks),0,1,0);

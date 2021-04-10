@@ -1,5 +1,7 @@
 package teamroots.embers.itemmod;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
@@ -24,6 +26,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageSuperheatFX;
 import teamroots.embers.util.EmberInventoryUtil;
 import teamroots.embers.util.ItemModUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class ModifierBlastingCore extends ModifierBase {
@@ -36,7 +39,7 @@ public class ModifierBlastingCore extends ModifierBase {
 	@SubscribeEvent
 	public void onDrops(BreakEvent event){
 		if (event.getPlayer() != null){
-			if (!event.getPlayer().getHeldItem(EnumHand.MAIN_HAND).isEmpty()){
+			if (!stackEmpty(event.getPlayer().getHeldItem(EnumHand.MAIN_HAND))){
 				ItemStack s = event.getPlayer().getHeldItem(EnumHand.MAIN_HAND);
 				if (ItemModUtil.getModifierLevel(s, ItemModUtil.modifierRegistry.get(RegistryManager.blasting_core).name) > 0 && EmberInventoryUtil.getEmberTotal(event.getPlayer()) >= cost){
 					int blastingLevel = ItemModUtil.getModifierLevel(s, ItemModUtil.modifierRegistry.get(RegistryManager.blasting_core).name);
@@ -63,7 +66,7 @@ public class ModifierBlastingCore extends ModifierBase {
 		if (event.getSource().getEntity() instanceof EntityPlayer){
 			EntityPlayer damager = (EntityPlayer)event.getSource().getEntity();
 			ItemStack s = damager.getHeldItemMainhand();
-			if (!s.isEmpty()){
+			if (!stackEmpty(s)){
 				int blastingLevel = ItemModUtil.getModifierLevel(s, ItemModUtil.modifierRegistry.get(RegistryManager.blasting_core).name);
 				float strength = (float)(2.0*(Math.atan(0.6*(blastingLevel))/(Math.PI)));
 				if (blastingLevel > 0 && EmberInventoryUtil.getEmberTotal(damager) >= cost){

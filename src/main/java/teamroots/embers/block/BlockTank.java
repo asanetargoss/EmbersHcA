@@ -48,7 +48,7 @@ public class BlockTank extends BlockTEBase {
 	}
 
     @Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean b)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn)
     {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BASE);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_SIDE_WEST);

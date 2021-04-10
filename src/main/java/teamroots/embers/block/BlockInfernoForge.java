@@ -34,7 +34,7 @@ public class BlockInfernoForge extends BlockTEBase {
 	}
 
     @Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean b)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn)
     {
     	if (state.getValue(isTop)){
     		TileEntity t = worldIn.getTileEntity(pos);

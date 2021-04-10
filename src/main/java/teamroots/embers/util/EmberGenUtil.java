@@ -58,7 +58,7 @@ public class EmberGenUtil {
 	public static float getMetalCoefficient(IBlockState state){
 		Block b = state.getBlock();
 		ItemStack s = new ItemStack(b);
-		if (s.isEmpty()){
+		if (ItemUtil.stackEmpty(s)){
 			return 0;
 		}
 		int[] ids = OreDictionary.getOreIDs(s);

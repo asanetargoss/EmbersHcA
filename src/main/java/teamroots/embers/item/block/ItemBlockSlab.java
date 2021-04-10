@@ -1,5 +1,7 @@
 package teamroots.embers.item.block;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.embers.Embers;
 import teamroots.embers.item.IModeledItem;
+import teamroots.embers.util.ItemUtil;
 
 public class ItemBlockSlab extends ItemBlock implements IModeledItem {
 	Block doubleSlab;
@@ -46,9 +49,9 @@ public class ItemBlockSlab extends ItemBlock implements IModeledItem {
 	
 	public void decrementHeldStack(EntityPlayer player, ItemStack stack, EnumHand hand){
 		if (!player.capabilities.isCreativeMode){
-			stack.shrink(1);
-			if (stack.getCount() == 0){
-				player.setItemStackToSlot(hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
+			stack.stackSize -= 1; // TODO: This looks dangerous
+			if (stack.stackSize == 0){
+				player.setItemStackToSlot(hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, EMPTY_ITEM_STACK);
 			}
 		}
 	}
@@ -60,10 +63,9 @@ public class ItemBlockSlab extends ItemBlock implements IModeledItem {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		ItemStack stack = playerIn.getHeldItem(hand);
-		if (stack.getCount() == 0)
+		if (stack.stackSize == 0)
 		{
 			return EnumActionResult.FAIL;
 		}
@@ -96,14 +98,14 @@ public class ItemBlockSlab extends ItemBlock implements IModeledItem {
 							                 this.doubleSlab.getSoundType().getPlaceSound(),
 							                 SoundCategory.BLOCKS,(this.doubleSlab.getSoundType().getVolume() + 1.0F) / 2.0F,
 							                 this.doubleSlab.getSoundType().getPitch() * 0.8F,true);
-						stack.shrink(1);
+						stack.stackSize -= 1; // TODO: This looks dangerous
 					}
 
 					return EnumActionResult.SUCCESS;
 				}
 			}
 
-			return (this.func_180615_a(stack, worldIn, pos.offset(side)) || (super.onItemUse(playerIn,
+			return (this.func_180615_a(stack, worldIn, pos.offset(side)) || (super.onItemUse(stack, playerIn,
 			                                                                                       worldIn, pos, hand, side,
 			                                                                                       hitX, hitY, hitZ) == EnumActionResult.SUCCESS ? true : false)) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 		}
@@ -150,7 +152,7 @@ public class ItemBlockSlab extends ItemBlock implements IModeledItem {
 				                        this.doubleSlab.getSoundType().getPlaceSound(),
 				                        SoundCategory.BLOCKS, (this.doubleSlab.getSoundType().getVolume() + 1.0F) / 2.0F,
 				                        this.doubleSlab.getSoundType().getPitch() * 0.8F, true);
-				p_180615_1_.shrink(1);
+				p_180615_1_.stackSize -= 1; //TODO: This looks dangerous
 			}
 
 			return true;

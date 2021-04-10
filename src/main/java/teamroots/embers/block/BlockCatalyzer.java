@@ -51,53 +51,41 @@ public class BlockCatalyzer extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		if (state.getValue(type) == 1){
-			if (world.getBlockState(fromPos).getBlock() == RegistryManager.reactor){
-				if (fromPos.compareTo(pos.offset(EnumFacing.NORTH)) == 0){
-					world.setBlockState(pos, getStateFromMeta(2));
-					world.notifyBlockUpdate(pos, state, getStateFromMeta(2), 8);
-				}
-				if (fromPos.compareTo(pos.offset(EnumFacing.EAST)) == 0){
-					world.setBlockState(pos, getStateFromMeta(3));
-					world.notifyBlockUpdate(pos, state, getStateFromMeta(3), 8);
-				}
-				if (fromPos.compareTo(pos.offset(EnumFacing.SOUTH)) == 0){
-					world.setBlockState(pos, getStateFromMeta(4));
-					world.notifyBlockUpdate(pos, state, getStateFromMeta(4), 8);
-				}
-				if (fromPos.compareTo(pos.offset(EnumFacing.WEST)) == 0){
-					world.setBlockState(pos, getStateFromMeta(5));
-					world.notifyBlockUpdate(pos, state, getStateFromMeta(5), 8);
-				}
-			}
+		    // Removed 1.11 logic for reference
+            //if (world.getBlockState(fromPos).getBlock() == RegistryManager.reactor){
+		    int metaIdx = 1;
+		    for (EnumFacing ori : new EnumFacing[]{EnumFacing.NORTH,EnumFacing.EAST,EnumFacing.SOUTH,EnumFacing.WEST}){
+                ++metaIdx;
+                
+		        BlockPos fromPos = pos.offset(ori);
+		        IBlockState reactorCandidateState = world.getBlockState(fromPos);
+		        if (reactorCandidateState != null){
+		            Block reactorCandidateBlock = reactorCandidateState.getBlock();
+		            if (reactorCandidateBlock == RegistryManager.reactor){
+		                world.setBlockState(pos, getStateFromMeta(metaIdx));
+		                world.notifyBlockUpdate(pos, state, getStateFromMeta(metaIdx), 8);
+		            }
+		        }
+		    }
 		}
 		else if (this.getFacingFromMeta(state.getValue(type)) != EnumFacing.DOWN){
-			BlockPos offPos = pos.offset(getFacingFromMeta(state.getValue(type)));
-			if (offPos.compareTo(fromPos) == 0){
-				if (world.getBlockState(offPos).getBlock() != RegistryManager.reactor){
-					if (world.getBlockState(pos.offset(EnumFacing.NORTH)).getBlock() == RegistryManager.reactor){
-						world.setBlockState(pos, getStateFromMeta(2));
-						world.notifyBlockUpdate(pos, state, getStateFromMeta(2), 8);
-					}
-					else if (world.getBlockState(pos.offset(EnumFacing.EAST)).getBlock() == RegistryManager.reactor){
-						world.setBlockState(pos, getStateFromMeta(3));
-						world.notifyBlockUpdate(pos, state, getStateFromMeta(3), 8);
-					}
-					else if (world.getBlockState(pos.offset(EnumFacing.SOUTH)).getBlock() == RegistryManager.reactor){
-						world.setBlockState(pos, getStateFromMeta(4));
-						world.notifyBlockUpdate(pos, state, getStateFromMeta(4), 8);
-					}
-					else if (world.getBlockState(pos.offset(EnumFacing.WEST)).getBlock() == RegistryManager.reactor){
-						world.setBlockState(pos, getStateFromMeta(5));
-						world.notifyBlockUpdate(pos, state, getStateFromMeta(5), 8);
-					}
-					else {
-						world.setBlockState(pos, getStateFromMeta(1));
-						world.notifyBlockUpdate(pos, state, getStateFromMeta(1), 8);
-					}
-				}
-			}
+		    // Removed 1.11 logic for reference
+            //BlockPos offPos = pos.offset(getFacingFromMeta(state.getValue(type)));
+            //if (offPos.compareTo(fromPos) == 0){
+			int metaIdx = 1;
+			int potentialMetaIdx = 1;
+            for (EnumFacing ori : new EnumFacing[]{EnumFacing.NORTH,EnumFacing.EAST,EnumFacing.SOUTH,EnumFacing.WEST}){
+                ++potentialMetaIdx;
+                if (world.getBlockState(pos.offset(ori)).getBlock() == RegistryManager.reactor){
+                    metaIdx = potentialMetaIdx;
+                }
+            }
+            if (state.getValue(type) != metaIdx) {
+                world.setBlockState(pos, getStateFromMeta(metaIdx));
+                world.notifyBlockUpdate(pos, state, getStateFromMeta(metaIdx), 8);
+            }
 		}
 	}
 	
@@ -221,7 +209,7 @@ public class BlockCatalyzer extends BlockTEBase {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack stack, EnumFacing side, float hitX, float hitY, float hitZ){
 		if (state.getValue(type) == 0){
 			return ((ITileEntityBase)world.getTileEntity(pos)).activate(world,pos,state,player,hand,side,hitX,hitY,hitZ);
 		}

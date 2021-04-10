@@ -1,5 +1,8 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.List;
 import java.util.Random;
 
@@ -36,6 +39,7 @@ import teamroots.embers.power.EmberCapabilityProvider;
 import teamroots.embers.power.IEmberCapability;
 import teamroots.embers.util.EmberGenUtil;
 import teamroots.embers.util.ItemModUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityInfernoForge extends TileEntity implements ITileEntityBase, ITickable, IMultiblockMachine {
@@ -160,11 +164,11 @@ public class TileEntityInfernoForge extends TileEntity implements ITileEntityBas
 					e.setPickupDelay(20);
 				}
 				if (progress == 0 && !world.isRemote){
-					ItemStack item = ItemStack.EMPTY;
+					ItemStack item = EMPTY_ITEM_STACK;
 					double emberValue = 0;
 					for (int i = 0; i < items.size(); i ++){
 						if (ItemModUtil.hasHeat(items.get(i).getEntityItem())){
-							if (item.isEmpty() && ItemModUtil.getLevel(items.get(i).getEntityItem()) <= 5 && ItemModUtil.getHeat(items.get(i).getEntityItem()) >= ItemModUtil.getMaxHeat(items.get(i).getEntityItem())){
+							if (stackEmpty(item) && ItemModUtil.getLevel(items.get(i).getEntityItem()) <= 5 && ItemModUtil.getHeat(items.get(i).getEntityItem()) >= ItemModUtil.getMaxHeat(items.get(i).getEntityItem())){
 								item = items.get(i).getEntityItem();
 							}
 							else {
@@ -184,7 +188,7 @@ public class TileEntityInfernoForge extends TileEntity implements ITileEntityBas
 							}
 						}
 					}
-					if (!item.isEmpty() && emberValue > 0 && emberValue <= EmberGenUtil.getEmberForItem(RegistryManager.ember_cluster)*3.0){
+					if (!stackEmpty(item) && emberValue > 0 && emberValue <= EmberGenUtil.getEmberForItem(RegistryManager.ember_cluster)*3.0){
 						TileEntity tile = world.getTileEntity(pos.up());
 						if (tile instanceof TileEntityInfernoForgeOpening){
 							((TileEntityInfernoForgeOpening)tile).isOpen = true;
@@ -220,11 +224,11 @@ public class TileEntityInfernoForge extends TileEntity implements ITileEntityBas
 	public void updateProgress(){
 		if (progress == 0){
 			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getPos().getX(),getPos().getY()+0.25,getPos().getZ(),getPos().getX()+1,getPos().getY()+1,getPos().getZ()+1));
-			ItemStack item = ItemStack.EMPTY;
+			ItemStack item = EMPTY_ITEM_STACK;
 			double emberValue = 0;
 			for (int i = 0; i < items.size(); i ++){
 				if (ItemModUtil.hasHeat(items.get(i).getEntityItem())){
-					if (item.isEmpty() && ItemModUtil.getLevel(items.get(i).getEntityItem()) < 5 && ItemModUtil.getHeat(items.get(i).getEntityItem()) >= ItemModUtil.getMaxHeat(items.get(i).getEntityItem())){
+					if (stackEmpty(item) && ItemModUtil.getLevel(items.get(i).getEntityItem()) < 5 && ItemModUtil.getHeat(items.get(i).getEntityItem()) >= ItemModUtil.getMaxHeat(items.get(i).getEntityItem())){
 						item = items.get(i).getEntityItem();
 					}
 					else {
@@ -240,7 +244,7 @@ public class TileEntityInfernoForge extends TileEntity implements ITileEntityBas
 					}
 				}
 			}
-			if (!item.isEmpty() && emberValue > 0 && emberValue < EmberGenUtil.getEmberForItem(RegistryManager.ember_cluster)*3.0){
+			if (!stackEmpty(item) && emberValue > 0 && emberValue < EmberGenUtil.getEmberForItem(RegistryManager.ember_cluster)*3.0){
 				progress = 200;
 				markDirty();
 			}

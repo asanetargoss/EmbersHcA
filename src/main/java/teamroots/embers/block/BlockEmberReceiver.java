@@ -53,7 +53,7 @@ public class BlockEmberReceiver extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		if (world.isAirBlock(pos.offset(state.getValue(facing),-1))){
 			world.setBlockToAir(pos);
 			this.dropBlockAsItem(world, pos, state, 0);

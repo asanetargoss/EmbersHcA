@@ -25,6 +25,7 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageEmberActivationFX;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.EmberGenUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityCatalyzer extends TileEntity implements ITileEntityBase, ITickable {
@@ -123,7 +124,7 @@ public class TileEntityCatalyzer extends TileEntity implements ITileEntityBase, 
 			}
 			markDirty();
 		}
-		if (progress == 0 && !inventory.getStackInSlot(0).isEmpty()){
+		if (progress == 0 && !ItemUtil.stackEmpty(inventory.getStackInSlot(0))){
 			if (EmberGenUtil.getCatalysisCoefficient(inventory.getStackInSlot(0).getItem()) > 0){
 				multiplier = EmberGenUtil.getCatalysisCoefficient(inventory.getStackInSlot(0).getItem());
 				progress = 400;

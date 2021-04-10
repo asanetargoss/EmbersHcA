@@ -1,5 +1,9 @@
 package teamroots.embers.block;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -19,7 +23,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -100,7 +103,7 @@ public class BlockSeed extends Block implements ITileEntityProvider, IModeledBlo
 	}
 	
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list){
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list){
 		list.add(new ItemStack(this,1,0));
 		list.add(new ItemStack(this,1,1));
 		list.add(new ItemStack(this,1,2));
@@ -109,7 +112,7 @@ public class BlockSeed extends Block implements ITileEntityProvider, IModeledBlo
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack hitItem, EnumFacing side, float hitX, float hitY, float hitZ){
 		return ((ITileEntityBase)world.getTileEntity(pos)).activate(world,pos,state,player,hand,side,hitX,hitY,hitZ);
 	}
 	

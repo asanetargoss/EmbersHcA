@@ -20,8 +20,8 @@ public class ItemCodex extends ItemBase {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand){
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
 		player.openGui(Embers.instance, 0, world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-		return new ActionResult<ItemStack>(EnumActionResult.PASS,player.getHeldItem(hand));
+		return new ActionResult<ItemStack>(EnumActionResult.PASS,stack);
 	}
 }

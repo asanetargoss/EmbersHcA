@@ -39,7 +39,7 @@ public class BlockFurnace extends BlockTEBase {
 	}
 
     @Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean b)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn)
     {
     	if (state.getValue(isTop)){
 	        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_SIDE_WEST);
@@ -48,7 +48,7 @@ public class BlockFurnace extends BlockTEBase {
 	        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_SIDE_SOUTH);
     	}
     	else {
-    		super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn, b);
+    		super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn);
     	}
     }
 	
@@ -136,7 +136,7 @@ public class BlockFurnace extends BlockTEBase {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack hitItem, EnumFacing side, float hitX, float hitY, float hitZ){
 		return ((ITileEntityBase)world.getTileEntity(pos)).activate(world,pos,state,player,hand,side,hitX,hitY,hitZ);
 	}
 }

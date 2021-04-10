@@ -1,5 +1,7 @@
 package teamroots.embers.block;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import net.minecraftforge.items.IItemHandler;
 import teamroots.embers.EventManager;
 import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageTEUpdateRequest;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class BlockItemGauge extends BlockBase implements IDial {
@@ -58,7 +61,7 @@ public class BlockItemGauge extends BlockBase implements IDial {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		if (world.isAirBlock(pos.offset(state.getValue(facing),-1))){
 			world.setBlockToAir(pos);
 			this.dropBlockAsItem(world, pos, state, 0);
@@ -93,11 +96,11 @@ public class BlockItemGauge extends BlockBase implements IDial {
 				if (handler != null){
 					for (int i = 0; i < handler.getSlots(); i ++){
 						String line = I18n.format("embers.tooltip.itemdial.slot").replace("{0}", Integer.toString(i))+": ";
-						if (handler.getStackInSlot(i) == ItemStack.EMPTY){
+						if (stackEmpty(handler.getStackInSlot(i))){
 							text.add(line+I18n.format("embers.tooltip.itemdial.noitem"));
 						}
 						else {
-							text.add(line+handler.getStackInSlot(i).getCount()+"x " + handler.getStackInSlot(i).getDisplayName());
+							text.add(line+handler.getStackInSlot(i).stackSize+"x " + handler.getStackInSlot(i).getDisplayName());
 						}
 					}
 				}

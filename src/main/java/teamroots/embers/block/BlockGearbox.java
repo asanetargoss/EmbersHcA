@@ -1,6 +1,7 @@
 package teamroots.embers.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -42,7 +43,7 @@ public class BlockGearbox extends BlockTEBase {
 	
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		return getDefaultState().withProperty(facing, EnumFacing.getDirectionFromEntityLiving(pos, placer));
+		return getDefaultState().withProperty(facing, BlockPistonBase.func_185647_a(pos, placer));
 	}
 	
 	@Override
@@ -56,7 +57,7 @@ public class BlockGearbox extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		TileEntityGearbox p = (TileEntityGearbox)world.getTileEntity(pos);
 		p.updateNeighbors();
 		p.markDirty();

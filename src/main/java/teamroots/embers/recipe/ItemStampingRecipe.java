@@ -1,13 +1,16 @@
 package teamroots.embers.recipe;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import teamroots.embers.item.EnumStampType;
+import teamroots.embers.util.ItemUtil;
 
 public class ItemStampingRecipe {
-	protected ItemStack stack = ItemStack.EMPTY;
+	protected ItemStack stack = EMPTY_ITEM_STACK;
 	protected FluidStack fluid = null;
-	public ItemStack result = ItemStack.EMPTY;
+	public ItemStack result = EMPTY_ITEM_STACK;
 	protected EnumStampType type = EnumStampType.TYPE_NULL;
 	boolean matchMetadata = false;
 	boolean matchNBT = false;
@@ -34,10 +37,10 @@ public class ItemStampingRecipe {
 	
 	public boolean matches(ItemStack stack, FluidStack fluid, EnumStampType type){
 		boolean matchesItem = false;
-		if (stack == ItemStack.EMPTY && this.stack == ItemStack.EMPTY){
+		if (stack == EMPTY_ITEM_STACK && this.stack == EMPTY_ITEM_STACK){
 			matchesItem = true;
 		}
-		else if (this.stack != ItemStack.EMPTY && stack != ItemStack.EMPTY){
+		else if (this.stack != EMPTY_ITEM_STACK && stack != EMPTY_ITEM_STACK){
 			if (this.matchNBT){
 				matchesItem = this.stack.getItem().equals(stack.getItem()) && this.stack.getMetadata() == stack.getMetadata() && ItemStack.areItemStackTagsEqual(this.stack, stack);
 			}

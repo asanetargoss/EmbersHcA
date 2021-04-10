@@ -1,13 +1,15 @@
 package teamroots.embers.item.bauble;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import baubles.api.BaubleType;
 import baubles.api.cap.IBaublesItemHandler;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 
 public class BaublesUtil {
-	public static NonNullList<ItemStack> getBaubles(IBaublesItemHandler items, BaubleType type){
-		NonNullList<ItemStack> stacks = NonNullList.create();
+	public static List<ItemStack> getBaubles(IBaublesItemHandler items, BaubleType type){
+		List<ItemStack> stacks = new ArrayList<>();
 		if (type == BaubleType.AMULET){
 			stacks.add(items.getStackInSlot(0));
 		}

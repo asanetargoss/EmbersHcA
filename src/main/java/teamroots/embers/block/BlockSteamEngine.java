@@ -58,7 +58,7 @@ public class BlockSteamEngine extends BlockTEBase {
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos){
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block){
 		TileEntitySteamEngine p = (TileEntitySteamEngine)world.getTileEntity(pos);
 		p.updateNearby();
 		p.markDirty();

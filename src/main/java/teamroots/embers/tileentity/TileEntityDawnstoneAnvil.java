@@ -1,5 +1,8 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,6 +40,7 @@ import teamroots.embers.network.message.MessageAnvilSparksFX;
 import teamroots.embers.network.message.MessageStamperFX;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.ItemModUtil;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityBase {
@@ -105,12 +109,12 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
+		if (stackEmpty(heldItem) && hand == EnumHand.MAIN_HAND) {
 			boolean doContinue = true;
 			for (int i = 1; i >= 0 && doContinue; i --){
-				if (!inventory.getStackInSlot(i).isEmpty() && !world.isRemote){
+				if (!stackEmpty(inventory.getStackInSlot(i)) && !world.isRemote){
 					world.spawnEntity(new EntityItem(world,player.posX,player.posY,player.posZ,inventory.getStackInSlot(i)));
-					inventory.setStackInSlot(i, ItemStack.EMPTY);
+					inventory.setStackInSlot(i, EMPTY_ITEM_STACK);
 					doContinue = false;
 					progress = 0;
 					markDirty();
@@ -122,18 +126,18 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 			onHit();
 			return true;
 		}
-		else if (!heldItem.isEmpty() && hand == EnumHand.MAIN_HAND){
+		else if (!stackEmpty(heldItem) && hand == EnumHand.MAIN_HAND){
 			ItemStack stack = heldItem.copy();
 			ItemStack stack2 = heldItem.copy();
-			stack2.setCount(1);
+			stack2.stackSize = 1;
 			boolean doContinue = true;
 			for (int i = 0; i < 2 && doContinue; i ++){
-				if (inventory.getStackInSlot(i).isEmpty()){
+				if (stackEmpty(inventory.getStackInSlot(i))){
 					this.inventory.insertItem(i,stack2,false);
 					doContinue = false;
-					player.getHeldItem(hand).shrink(1);
-					if (player.getHeldItem(hand).getCount() == 0){
-						player.setHeldItem(hand, ItemStack.EMPTY);
+					player.getHeldItem(hand).stackSize -= 1; // TODO: Looks dangerous
+					if (player.getHeldItem(hand).stackSize == 0){
+						player.setHeldItem(hand, EMPTY_ITEM_STACK);
 					}
 					progress = 0;
 					markDirty();
@@ -160,7 +164,7 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 				return true;
 			}
 			else if (ItemModUtil.hasHeat(stack1)){
-				if (stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).tagCount() > 0 && stack2.isEmpty()){
+				if (stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).tagCount() > 0 && stackEmpty(stack2)){
 					return true;
 				}
 			}
@@ -169,7 +173,7 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 				|| stack1.getItem().isRepairable() && stack2.getItem() == RegistryManager.isolated_materia){
 			return true;
 		}
-		if (!Misc.getRepairItem(stack1).isEmpty() && stack1.getItem().getIsRepairable(stack1, Misc.getRepairItem(stack1)) && Misc.getResourceCount(stack1) != -1 && stack2.isEmpty()){
+		if (!stackEmpty(Misc.getRepairItem(stack1)) && stack1.getItem().getIsRepairable(stack1, Misc.getRepairItem(stack1)) && Misc.getResourceCount(stack1) != -1 && stackEmpty(stack2)){
 			return true;
 		}
 		return false;
@@ -181,8 +185,8 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 				ItemModUtil.checkForTag(stack1);
 				ItemModUtil.addModifier(stack1, stack2.copy());
 				ItemStack result = stack1.copy();
-				inventory.setStackInSlot(1, ItemStack.EMPTY);
-				inventory.setStackInSlot(0, ItemStack.EMPTY);
+				inventory.setStackInSlot(1, EMPTY_ITEM_STACK);
+				inventory.setStackInSlot(0, EMPTY_ITEM_STACK);
 				markDirty();
 				return new ItemStack[]{result};
 			}
@@ -190,26 +194,26 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 				ItemModUtil.checkForTag(stack1);
 				ItemModUtil.addModifier(stack1, stack2);
 				ItemStack result = stack1.copy();
-				inventory.setStackInSlot(1, ItemStack.EMPTY);
-				inventory.setStackInSlot(0, ItemStack.EMPTY);
+				inventory.setStackInSlot(1, EMPTY_ITEM_STACK);
+				inventory.setStackInSlot(0, EMPTY_ITEM_STACK);
 				markDirty();
 				return new ItemStack[]{result};
 			}
-			else if (ItemModUtil.hasHeat(stack1) && stack2.isEmpty()){
+			else if (ItemModUtil.hasHeat(stack1) && stackEmpty(stack2)){
 				if (stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).tagCount() > 0){
 					List<ItemStack> stacks = new ArrayList<ItemStack>();
 					for (int i = 0; i < stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).tagCount(); i ++){
-						ItemStack s = new ItemStack(stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i).getCompoundTag("item"));
+						ItemStack s = ItemStack.func_77949_a((stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i).getCompoundTag("item")));
 						if (ItemModUtil.modifierRegistry.get(s.getItem()) != null && ItemModUtil.modifierRegistry.get(s.getItem()).countTowardsTotalLevel){
 							for (int j = 0; j < stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i).getInteger("level"); j ++){
-								stacks.add(new ItemStack(stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i).getCompoundTag("item")));
+								stacks.add(ItemStack.func_77949_a((stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).getTagList("modifiers", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i).getCompoundTag("item"))));
 							}
 						}
 					}
 					stack1.getTagCompound().getCompoundTag(ItemModUtil.HEAT_TAG).setTag("modifiers", new NBTTagList());
 					stacks.add(stack1.copy());
-					inventory.setStackInSlot(0, ItemStack.EMPTY);
-					inventory.setStackInSlot(1, ItemStack.EMPTY);
+					inventory.setStackInSlot(0, EMPTY_ITEM_STACK);
+					inventory.setStackInSlot(1, EMPTY_ITEM_STACK);
 					markDirty();
 					return stacks.toArray(new ItemStack[stacks.size()]);
 				}
@@ -217,16 +221,16 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 		}
 		if (stack1.getItem().getIsRepairable(stack1, stack2)
 				|| stack1.getItem().isRepairable() && stack2.getItem() == RegistryManager.isolated_materia){
-			inventory.setStackInSlot(1, ItemStack.EMPTY);
+			inventory.setStackInSlot(1, EMPTY_ITEM_STACK);
 			inventory.getStackInSlot(0).setItemDamage(Math.max(0, inventory.getStackInSlot(0).getItemDamage() - inventory.getStackInSlot(0).getMaxDamage()));
 			ItemStack result = inventory.getStackInSlot(0).copy();
-			inventory.setStackInSlot(0, ItemStack.EMPTY);
+			inventory.setStackInSlot(0, EMPTY_ITEM_STACK);
 			markDirty();
 			return new ItemStack[]{result};
 		}
-		if (stack1.getItem().getIsRepairable(stack1, Misc.getRepairItem(stack1)) && Misc.getResourceCount(stack1) != -1 && stack2 == ItemStack.EMPTY){
+		if (stack1.getItem().getIsRepairable(stack1, Misc.getRepairItem(stack1)) && Misc.getResourceCount(stack1) != -1 && stack2 == EMPTY_ITEM_STACK){
 			int resourceAmount = Misc.getResourceCount(stack1);
-			inventory.setStackInSlot(0, ItemStack.EMPTY);
+			inventory.setStackInSlot(0, EMPTY_ITEM_STACK);
 			markDirty();
 			return new ItemStack[]{new ItemStack(Misc.getRepairItem(stack1).getItem(),resourceAmount,Misc.getRepairItem(stack1).getItemDamage())};		
 		}
@@ -258,7 +262,7 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 					if (getWorld().getTileEntity(getPos().down()) instanceof TileEntityBin){
 						TileEntityBin bin = (TileEntityBin)getWorld().getTileEntity(getPos().down());
 						ItemStack remainder = bin.inventory.insertItem(0, result, false);
-						if (remainder != ItemStack.EMPTY && !getWorld().isRemote){
+						if (remainder != EMPTY_ITEM_STACK && !getWorld().isRemote){
 							EntityItem item = new EntityItem(getWorld(),getPos().getX()+0.5,getPos().getY()+1.0625f,getPos().getZ()+0.5,remainder);
 							getWorld().spawnEntity(item);
 						}

@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -29,6 +31,7 @@ import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.power.DefaultEmberCapability;
 import teamroots.embers.power.EmberCapabilityProvider;
 import teamroots.embers.power.IEmberCapability;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityCinderPlinth extends TileEntity implements ITileEntityBase, ITickable {
@@ -124,15 +127,15 @@ public class TileEntityCinderPlinth extends TileEntity implements ITileEntityBas
 	public boolean activate(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem != ItemStack.EMPTY){
+		if (heldItem != EMPTY_ITEM_STACK){
 			player.setHeldItem(hand, this.inventory.insertItem(0,heldItem,false));
 			markDirty();
 			return true;
 		}
 		else {
-			if (inventory.getStackInSlot(0) != ItemStack.EMPTY){
+			if (inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (!getWorld().isRemote){
-					player.setHeldItem(hand, inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false));
+					player.setHeldItem(hand, inventory.extractItem(0, inventory.getStackInSlot(0).stackSize, false));
 					markDirty();
 				}
 				return true;
@@ -151,7 +154,7 @@ public class TileEntityCinderPlinth extends TileEntity implements ITileEntityBas
 	@Override
 	public void update() {
 		turnRate = 1;
-		if (inventory.getStackInSlot(0) != ItemStack.EMPTY && capability.getEmber() > 0){
+		if (inventory.getStackInSlot(0) != ItemUtil.EMPTY_ITEM_STACK && capability.getEmber() > 0){
 			progress ++;
 			if (getWorld().isRemote){
 				ParticleUtil.spawnParticleSmoke(getWorld(), (float)getPos().getX()+0.5f, (float)getPos().getY()+0.875f, (float)getPos().getZ()+0.5f, 0.0125f*(random.nextFloat()-0.5f), 0.05f*(random.nextFloat()+1.0f), 0.0125f*(random.nextFloat()-0.5f), 72, 72, 72, 1.0f, 3.0f+random.nextFloat(), 48);
@@ -163,12 +166,12 @@ public class TileEntityCinderPlinth extends TileEntity implements ITileEntityBas
 				TileEntity tile = getWorld().getTileEntity(getPos().down());
 				boolean doSpawn = true;
 				if (tile instanceof TileEntityBin){
-					if (((TileEntityBin) tile).inventory.getStackInSlot(0) == ItemStack.EMPTY){
+					if (((TileEntityBin) tile).inventory.getStackInSlot(0) == ItemUtil.EMPTY_ITEM_STACK){
 						((TileEntityBin) tile).inventory.insertItem(0, new ItemStack(RegistryManager.dust_ash,1), false);
 						tile.markDirty();
 						doSpawn = false;
 					}
-					else if (((TileEntityBin) tile).inventory.getStackInSlot(0).getItem() == RegistryManager.dust_ash && ((TileEntityBin) tile).inventory.getStackInSlot(0).getCount() < 64){
+					else if (((TileEntityBin) tile).inventory.getStackInSlot(0).getItem() == RegistryManager.dust_ash && ((TileEntityBin) tile).inventory.getStackInSlot(0).stackSize < 64){
 						((TileEntityBin) tile).inventory.insertItem(0, new ItemStack(RegistryManager.dust_ash,1), false);
 						tile.markDirty();
 						doSpawn = false;

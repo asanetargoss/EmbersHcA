@@ -1,5 +1,7 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
@@ -19,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import teamroots.embers.Embers;
+import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.RenderUtil;
 import teamroots.embers.util.StructUV;
 
@@ -35,7 +38,7 @@ public class TileEntityAlchemyPedestalRenderer extends TileEntitySpecialRenderer
 		if (tile instanceof TileEntityAlchemyPedestal){
             GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 			TileEntityAlchemyPedestal pedestal = (TileEntityAlchemyPedestal)tile;
-			if (pedestal.inventory.getStackInSlot(1) != ItemStack.EMPTY){
+			if (pedestal.inventory.getStackInSlot(1) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GL11.glPushMatrix();
 					GL11.glTranslated(x+0.5, y+0.75, z+0.5);
@@ -45,8 +48,8 @@ public class TileEntityAlchemyPedestalRenderer extends TileEntitySpecialRenderer
 				}
 			}
 			
-			if (pedestal.inventory.getStackInSlot(0) != ItemStack.EMPTY){
-				float coeff = pedestal.inventory.getStackInSlot(0).getCount()/64.0f;
+			if (pedestal.inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
+				float coeff = pedestal.inventory.getStackInSlot(0).stackSize/64.0f;
 	            
 	            Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 	            Tessellator tess = Tessellator.getInstance();
