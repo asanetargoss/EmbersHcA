@@ -666,6 +666,14 @@ public class RecipeRegistry {
 				'B', RegistryManager.block_caminite_brick,
 				'S', "ingotSilver",
 				'F', Blocks.FURNACE}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.display_pedestal,1),true,new Object[]{
+                "ICI",
+                "PPP",
+                "L L",
+                'I', "nuggetIron",
+                'C', RegistryManager.plate_caminite,
+                'P', "plankWood",
+                'L', "logWood"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.alchemy_pedestal,1),true,new Object[]{
 				"D D",
 				"ICI",
