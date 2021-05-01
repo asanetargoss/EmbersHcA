@@ -27,7 +27,7 @@ import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
-public class TileEntityKnowledgeTable extends TileEntity implements ITileEntityBase, ITickable {
+public class TileEntityDisplayPedestal extends TileEntity implements ITileEntityBase, ITickable {
 	int angle = 0;
 	int turnRate = 0;
 	public ItemStackHandler inventory = new ItemStackHandler(1){
@@ -35,12 +35,12 @@ public class TileEntityKnowledgeTable extends TileEntity implements ITileEntityB
         protected void onContentsChanged(int slot) {
             // We need to tell the tile entity that something has changed so
             // that the chest contents is persisted
-        	TileEntityKnowledgeTable.this.markDirty();
+        	TileEntityDisplayPedestal.this.markDirty();
         }
 	};
 	Random random = new Random();
 	
-	public TileEntityKnowledgeTable(){
+	public TileEntityDisplayPedestal(){
 		super();
 	}
 	

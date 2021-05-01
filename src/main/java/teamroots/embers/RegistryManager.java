@@ -63,7 +63,7 @@ public class RegistryManager {
 	public static ToolMaterial tool_mat_aluminum, tool_mat_bronze, tool_mat_tin, tool_mat_electrum, tool_mat_nickel;
 	public static ArmorMaterial armor_mat_ashen_cloak;
 	
-	public static Block mechanical_pump, steam_engine, gearbox_frame, creative_ember_source, creative_mech_source, axle_iron, caminite_lever, inferno_forge, inferno_forge_edge, ember_pulser, field_chart, catalyzer, combustor, reactor, archaic_tile, archaic_edge, wrapped_sealed_planks, structure_marker, boiler, ember_injector, seed, breaker, vacuum, sealed_planks, ore_quartz, auto_hammer, dawnstone_anvil, archaic_light, archaic_bricks, glow, beam_cannon, item_transfer, alchemy_tablet, alchemy_pedestal, knowledge_table, cinder_plinth, ashen_tile, stairs_ashen_tile, wall_ashen_tile, ashen_tile_slab, ashen_tile_slab_double, ashen_stone, ashen_brick, stairs_ashen_stone, wall_ashen_stone, ashen_stone_slab, ashen_stone_slab_double, stairs_ashen_brick, wall_ashen_brick, ashen_brick_slab, ashen_brick_slab_double, block_caminite_brick_slab, block_caminite_brick_slab_double, charger, crystal_cell, advanced_edge, ember_relay, beam_splitter, block_lantern, ember_gauge, item_gauge, fluid_gauge, large_tank, item_dropper, heat_coil, wall_caminite_brick, block_dawnstone, mixer, stone_edge, ember_activator, mech_core, stairs_caminite_brick, mech_accessor, ember_bore, mech_edge, item_pump, item_pipe, block_oven, stamp_base, stamper, block_caminite_large_brick, bin, copper_cell, deep_line, ember_emitter, ember_receiver, block_furnace, pump, block_copper, block_lead, block_silver, block_mithril, ore_copper, ore_lead, ore_silver, block_caminite_brick, block_tank, pipe;
+	public static Block mechanical_pump, steam_engine, gearbox_frame, creative_ember_source, creative_mech_source, axle_iron, caminite_lever, inferno_forge, inferno_forge_edge, ember_pulser, field_chart, catalyzer, combustor, reactor, archaic_tile, archaic_edge, wrapped_sealed_planks, structure_marker, boiler, ember_injector, seed, breaker, vacuum, sealed_planks, ore_quartz, auto_hammer, dawnstone_anvil, archaic_light, archaic_bricks, glow, beam_cannon, item_transfer, alchemy_tablet, alchemy_pedestal, display_pedestal, cinder_plinth, ashen_tile, stairs_ashen_tile, wall_ashen_tile, ashen_tile_slab, ashen_tile_slab_double, ashen_stone, ashen_brick, stairs_ashen_stone, wall_ashen_stone, ashen_stone_slab, ashen_stone_slab_double, stairs_ashen_brick, wall_ashen_brick, ashen_brick_slab, ashen_brick_slab_double, block_caminite_brick_slab, block_caminite_brick_slab_double, charger, crystal_cell, advanced_edge, ember_relay, beam_splitter, block_lantern, ember_gauge, item_gauge, fluid_gauge, large_tank, item_dropper, heat_coil, wall_caminite_brick, block_dawnstone, mixer, stone_edge, ember_activator, mech_core, stairs_caminite_brick, mech_accessor, ember_bore, mech_edge, item_pump, item_pipe, block_oven, stamp_base, stamper, block_caminite_large_brick, bin, copper_cell, deep_line, ember_emitter, ember_receiver, block_furnace, pump, block_copper, block_lead, block_silver, block_mithril, ore_copper, ore_lead, ore_silver, block_caminite_brick, block_tank, pipe;
 	public static Block block_molten_dawnstone, block_molten_gold, block_molten_copper, block_molten_lead, block_molten_silver, block_molten_iron,
 						block_molten_aluminum, block_molten_tin, block_molten_bronze, block_molten_electrum, block_molten_nickel;
 	public static Block ore_nickel, block_nickel;
@@ -179,6 +179,7 @@ public class RegistryManager {
 		items.add(new ItemBlockSlab(ashen_tile_slab, ashen_tile_slab_double));
 		blocks.add(stairs_ashen_tile = (new BlockStairsBase(RegistryManager.ashen_tile.getDefaultState(),"stairs_ashen_tile",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f).setLightOpacity(16));
 		blocks.add(wall_ashen_tile = (new BlockWallBase(RegistryManager.ashen_tile,"wall_ashen_tile",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f));
+		blocks.add(display_pedestal = (new BlockDisplayPedestal(Material.WOOD, "display_pedestal",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("axe", 0).setHardness(1.6f));
 		blocks.add(cinder_plinth = (new BlockCinderPlinth(Material.ROCK, "cinder_plinth",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f));
 		blocks.add(alchemy_pedestal = (new BlockAlchemyPedestal(Material.ROCK, "alchemy_pedestal",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f));
 		blocks.add(alchemy_tablet = (new BlockAlchemyTablet(Material.ROCK, "alchemy_tablet",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.6f));
@@ -452,7 +453,7 @@ public class RegistryManager {
 		GameRegistry.registerTileEntity(TileEntityCrystalCell.class, Embers.MODID+":tile_entity_crystal_cell");
 		GameRegistry.registerTileEntity(TileEntityCharger.class, Embers.MODID+":tile_entity_charger");
 		GameRegistry.registerTileEntity(TileEntityCinderPlinth.class, Embers.MODID+":tile_entity_cinder_plinth");
-		GameRegistry.registerTileEntity(TileEntityKnowledgeTable.class, Embers.MODID+":tile_entity_knowledge_table");
+		GameRegistry.registerTileEntity(TileEntityDisplayPedestal.class, Embers.MODID+":tile_entity_display_pedestal");
 		GameRegistry.registerTileEntity(TileEntityAlchemyPedestal.class, Embers.MODID+":tile_entity_alchemy_pedestal");
 		GameRegistry.registerTileEntity(TileEntityAlchemyTablet.class, Embers.MODID+":tile_entity_alchemy_tablet");
 		GameRegistry.registerTileEntity(TileEntityItemTransfer.class, Embers.MODID+":tile_entity_item_transfer");
@@ -590,7 +591,7 @@ public class RegistryManager {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalCell.class, new TileEntityCrystalCellRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCharger.class, new TileEntityChargerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCinderPlinth.class, new TileEntityCinderPlinthRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKnowledgeTable.class, new TileEntityKnowledgeTableRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayPedestal.class, new TileEntityDisplayPedestalRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemyPedestal.class, new TileEntityAlchemyPedestalRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemyTablet.class, new TileEntityAlchemyTabletRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityItemTransfer.class, new TileEntityItemTransferRenderer());

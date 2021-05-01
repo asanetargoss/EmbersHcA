@@ -1,0 +1,8 @@
+{
+    "variants":{
+        "facing=north": { "model": "embers:display_pedestal" },
+        "facing=south": { "model": "embers:display_pedestal", "y": 180 },
+        "facing=west":  { "model": "embers:display_pedestal", "y": 270 },
+        "facing=east":  { "model": "embers:display_pedestal", "y": 90 }
+    }
+}

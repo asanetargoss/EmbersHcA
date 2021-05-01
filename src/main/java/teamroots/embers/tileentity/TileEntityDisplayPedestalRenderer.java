@@ -15,17 +15,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import teamroots.embers.util.ItemUtil;
 
-public class TileEntityKnowledgeTableRenderer extends TileEntitySpecialRenderer {
+public class TileEntityDisplayPedestalRenderer extends TileEntitySpecialRenderer {
 	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 	Random random = new Random();
-	public TileEntityKnowledgeTableRenderer(){
+	public TileEntityDisplayPedestalRenderer(){
 		super();
 	}
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks, int destroyStage){
-		if (tile instanceof TileEntityKnowledgeTable){
-			TileEntityKnowledgeTable table = (TileEntityKnowledgeTable)tile;
+		if (tile instanceof TileEntityDisplayPedestal){
+			TileEntityDisplayPedestal table = (TileEntityDisplayPedestal)tile;
 			if (table.inventory.getStackInSlot(0) != EMPTY_ITEM_STACK){
 				if (Minecraft.getMinecraft().world != null){
 					GlStateManager.pushAttrib();

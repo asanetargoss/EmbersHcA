@@ -9,12 +9,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamroots.embers.tileentity.TileEntityKnowledgeTable;
+import teamroots.embers.tileentity.TileEntityDisplayPedestal;
 
-public class BlockKnowledgeTable extends BlockTEBase {
+public class BlockDisplayPedestal extends BlockTEBase {
 	public static final PropertyDirection facing = PropertyDirection.create("facing");
 	
-	public BlockKnowledgeTable(Material material, String name, boolean addToTab) {
+	public BlockDisplayPedestal(Material material, String name, boolean addToTab) {
 		super(material, name, addToTab);
 	}
 	
@@ -40,6 +40,6 @@ public class BlockKnowledgeTable extends BlockTEBase {
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityKnowledgeTable();
+		return new TileEntityDisplayPedestal();
 	}
 }
