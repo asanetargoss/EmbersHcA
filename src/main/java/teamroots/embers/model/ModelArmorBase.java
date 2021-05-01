@@ -1,6 +1,7 @@
 package teamroots.embers.model;
 
 import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.stackEmpty;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -14,7 +15,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
-import teamroots.embers.util.ItemUtil;
 
 public class ModelArmorBase extends ModelBiped {
 	
@@ -162,7 +162,7 @@ public class ModelArmorBase extends ModelBiped {
 				}
 				if (entity instanceof EntityLivingBase){
 					ItemStack stack = ((EntityLivingBase)entity).getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-					if (stack.hasTagCompound()){
+					if (!stackEmpty(stack) && stack.hasTagCompound()){
 						for (int i = 1; i < 8; i ++){
 							this.cape.childModels.get(i+2).showModel = slot == EntityEquipmentSlot.CHEST && stack.getTagCompound().hasKey("gem"+i);
 						}

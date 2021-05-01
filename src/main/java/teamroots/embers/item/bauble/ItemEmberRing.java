@@ -1,5 +1,7 @@
 package teamroots.embers.item.bauble;
 
+import static teamroots.embers.util.ItemUtil.getItem;
+
 import java.util.List;
 
 import baubles.api.BaubleType;
@@ -23,10 +25,10 @@ public class ItemEmberRing extends ItemBaubleBase {
 	public void onTake(EmberRemoveEvent event){
 		if (event.getPlayer().hasCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null)){
 			List<ItemStack> stacks = BaublesUtil.getBaubles(event.getPlayer().getCapability(BaublesCapabilities.CAPABILITY_BAUBLES,null), BaubleType.RING);
-			if (stacks.get(0).getItem() == this){
+			if (getItem(stacks.get(0)) == this){
 				event.addReduction(0.15);
 			}
-			if (stacks.get(1).getItem() == this){
+			if (getItem(stacks.get(1)) == this){
 				event.addReduction(0.15);
 			}
 		}

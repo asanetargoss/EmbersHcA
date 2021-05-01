@@ -156,6 +156,10 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 	}
 	
 	public boolean isValid(ItemStack stack1, ItemStack stack2){
+	    if (ItemUtil.stackEmpty(stack1) || ItemUtil.stackEmpty(stack2)) {
+	        return false;
+	    }
+	    
 		if (stack1.getItem() instanceof ItemTool || stack1.getItem() instanceof ItemSword || stack1.getItem() instanceof ItemArmor){
 			if (!ItemModUtil.hasHeat(stack1) && stack2.getItem() == RegistryManager.ancient_motive_core){
 				return true;
@@ -180,6 +184,10 @@ public class TileEntityDawnstoneAnvil extends TileEntity implements ITileEntityB
 	}
 	
 	public ItemStack[] getResult(ItemStack stack1, ItemStack stack2){
+        if (ItemUtil.stackEmpty(stack1) || ItemUtil.stackEmpty(stack2)) {
+            return new ItemStack[]{};
+        }
+	    
 		if (stack1.getItem() instanceof ItemTool || stack1.getItem() instanceof ItemSword || stack1.getItem() instanceof ItemArmor){
 			if ((!ItemModUtil.hasHeat(stack1) || !ItemModUtil.hasModifier(stack1, ItemModUtil.modifierRegistry.get(RegistryManager.ancient_motive_core).name)) && stack2.getItem() == RegistryManager.ancient_motive_core){
 				ItemModUtil.checkForTag(stack1);

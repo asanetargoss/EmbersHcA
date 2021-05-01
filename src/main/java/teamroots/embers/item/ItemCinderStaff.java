@@ -1,5 +1,7 @@
 package teamroots.embers.item;
 
+import static teamroots.embers.util.ItemUtil.getItem;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.embers.entity.EntityEmberProjectile;
 import teamroots.embers.particle.ParticleUtil;
 import teamroots.embers.util.EmberInventoryUtil;
+import teamroots.embers.util.ItemUtil;
 
 public class ItemCinderStaff extends ItemBase {
 	public ItemCinderStaff() {
@@ -36,7 +39,7 @@ public class ItemCinderStaff extends ItemBase {
 	
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged){
-		return slotChanged || newStack.getItem() != oldStack.getItem();
+		return slotChanged || getItem(newStack) != getItem(oldStack);
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package teamroots.embers.util;
 
+import static teamroots.embers.util.ItemUtil.stackEmpty;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,7 +153,7 @@ public class ItemModUtil {
 	}
 	
 	public static float getMaxHeat(ItemStack stack){
-		if (stack.hasTagCompound()){
+		if (!stackEmpty(stack) && stack.hasTagCompound()){
 			if (stack.getTagCompound().hasKey(HEAT_TAG)){
 				return 500f + 250f*stack.getTagCompound().getCompoundTag(HEAT_TAG).getFloat("heat_level");
 			}
@@ -160,6 +162,9 @@ public class ItemModUtil {
 	}
 	
 	public static float getHeat(ItemStack stack){
+        if (stackEmpty(stack)) {
+            return 0;
+        }
 		if (stack.hasTagCompound()){
 			if (stack.getTagCompound().hasKey(HEAT_TAG)){
 				return stack.getTagCompound().getCompoundTag(HEAT_TAG).getFloat("heat");
@@ -169,6 +174,9 @@ public class ItemModUtil {
 	}
 	
 	public static int getLevel(ItemStack stack){
+	    if (stackEmpty(stack)) {
+	        return 0;
+	    }
 		checkForTag(stack);
 		return stack.getTagCompound().getCompoundTag(HEAT_TAG).getInteger("heat_level");
 	}

@@ -1,6 +1,9 @@
 package teamroots.embers.util;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
@@ -20,6 +23,13 @@ public class ItemUtil {
         }
         ItemStack simulatedResult = handler.insertItem(slot, testStack, true);
         return stackEmpty(simulatedResult) || (!stackEmpty(testStack) && simulatedResult.stackSize < testStack.stackSize);
+    }
+    
+    public static @Nullable Item getItem(ItemStack stack) {
+        if (stackEmpty(stack)) {
+            return null;
+        }
+        return stack.getItem();
     }
 
 }

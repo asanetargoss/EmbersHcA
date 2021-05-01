@@ -1,5 +1,7 @@
 package teamroots.embers;
 
+import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.getItem;
 import static teamroots.embers.util.ItemUtil.stackEmpty;
 
 import java.awt.Color;
@@ -119,7 +121,6 @@ import teamroots.embers.research.ResearchManager;
 import teamroots.embers.tileentity.ITileEntityBase;
 import teamroots.embers.tileentity.ITileEntitySpecialRendererLater;
 import teamroots.embers.tileentity.TileEntityDawnstoneAnvil;
-import teamroots.embers.tileentity.TileEntityKnowledgeTable;
 import teamroots.embers.util.BlockTextureUtil;
 import teamroots.embers.util.EmberGenUtil;
 import teamroots.embers.util.EmberInventoryUtil;
@@ -231,6 +232,9 @@ public class EventManager {
 			}
 		}
 		for (ItemStack s : event.getEntityLiving().getEquipmentAndArmor()){
+		    if (stackEmpty(s)) {
+		        continue;
+		    }
 			if (s.getItem() instanceof ItemArmor){
 				if (ItemModUtil.hasHeat(s)){
 					ItemModUtil.addHeat(s, 5.0f);
@@ -380,7 +384,7 @@ public class EventManager {
 		}
 		if (event.getSource().getEntity() != null){
 			if (event.getSource().getEntity() instanceof EntityPlayer){
-				if (((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand().getItem() == RegistryManager.tyrfing){
+				if (getItem(((EntityPlayer)event.getSource().getEntity()).getHeldItemMainhand()) == RegistryManager.tyrfing){
 					if (!event.getEntity().world.isRemote){
 						PacketHandler.INSTANCE.sendToAll(new MessageTyrfingBurstFX(event.getEntity().posX,event.getEntity().posY+event.getEntity().height/2.0f,event.getEntity().posZ));
 					}
@@ -452,7 +456,7 @@ public class EventManager {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onTooltipRender(RenderTooltipEvent.PostText event){
-		if (event.getStack() != null){
+		if (event.getStack() != EMPTY_ITEM_STACK){
 			if (ItemModUtil.hasHeat(event.getStack())){
 				for (int i = 0; i < event.getLines().size(); i ++){
 					if (event.getLines().get(i).compareTo(TextFormatting.GRAY+""+TextFormatting.GRAY+I18n.format("embers.tooltip.modifiers")) == 0){

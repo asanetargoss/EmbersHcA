@@ -1,5 +1,6 @@
 package teamroots.embers.tileentity;
 
+import static teamroots.embers.util.ItemUtil.getItem;
 import static teamroots.embers.util.ItemUtil.stackEmpty;
 
 import java.util.Random;
@@ -27,7 +28,6 @@ import teamroots.embers.network.PacketHandler;
 import teamroots.embers.network.message.MessageEmberActivationFX;
 import teamroots.embers.network.message.MessageTEUpdate;
 import teamroots.embers.util.EmberGenUtil;
-import teamroots.embers.util.ItemUtil;
 import teamroots.embers.util.Misc;
 
 public class TileEntityActivatorBottom extends TileEntity implements ITileEntityBase, ITickable {
@@ -126,7 +126,7 @@ public class TileEntityActivatorBottom extends TileEntity implements ITileEntity
 						progress = 0;
 						int i = 0;
 						if (inventory != null){
-							if (EmberGenUtil.getEmberForItem(inventory.getStackInSlot(i).getItem()) > 0){
+							if (EmberGenUtil.getEmberForItem(getItem(inventory.getStackInSlot(i))) > 0){
 								double ember = EmberGenUtil.getEmberForItem(inventory.getStackInSlot(i).getItem());
 								if (top.capability.getEmber() <= top.capability.getEmberCapacity()-ember){
 									if (!world.isRemote){

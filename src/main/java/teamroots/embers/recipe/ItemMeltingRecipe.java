@@ -1,10 +1,10 @@
 package teamroots.embers.recipe;
 
 import static teamroots.embers.util.ItemUtil.EMPTY_ITEM_STACK;
+import static teamroots.embers.util.ItemUtil.getItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import teamroots.embers.util.ItemUtil;
 
 public class ItemMeltingRecipe {
 	private ItemStack stack = EMPTY_ITEM_STACK;
@@ -28,11 +28,11 @@ public class ItemMeltingRecipe {
 	
 	public boolean matches(ItemStack stack){
 		if (this.matchNBT){
-			return this.stack.getItem().equals(stack.getItem()) && this.stack.getMetadata() == stack.getMetadata() && ItemStack.areItemStackTagsEqual(this.stack, stack);
+			return this.stack.getItem().equals(getItem(stack)) && this.stack.getMetadata() == stack.getMetadata() && ItemStack.areItemStackTagsEqual(this.stack, stack);
 		}
 		if (this.matchMetadata){
-			return this.stack.getItem().equals(stack.getItem()) && this.stack.getMetadata() == stack.getMetadata();
+			return this.stack.getItem().equals(getItem(stack)) && this.stack.getMetadata() == stack.getMetadata();
 		}
-		return this.stack.getItem().equals(stack.getItem());
+		return this.stack.getItem().equals(getItem(stack));
 	}
 }
