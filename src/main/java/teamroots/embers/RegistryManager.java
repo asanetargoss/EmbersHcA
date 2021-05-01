@@ -150,7 +150,7 @@ public class RegistryManager {
 		blocks.add(item_dropper = (new BlockDropper(Material.ROCK,"item_dropper",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
 		blocks.add(large_tank = (new BlockLargeTank(Material.ROCK,"large_tank",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
 		blocks.add(ember_gauge = (new BlockEmberGauge(Material.ROCK,"ember_gauge",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
-		//blocks.add(item_gauge = (new BlockItemGauge(Material.ROCK,"item_gauge",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
+		blocks.add(item_gauge = (new BlockItemGauge(Material.ROCK,"item_gauge",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
 		blocks.add(fluid_gauge = (new BlockFluidGauge(Material.ROCK,"fluid_gauge",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
 		blocks.add(block_lantern = (new BlockLantern(Material.ROCK,"block_lantern",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f).setLightLevel(1.0f));
 		blocks.add(beam_splitter = (new BlockBeamSplitter(Material.ROCK,"beam_splitter",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
