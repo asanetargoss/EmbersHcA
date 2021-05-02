@@ -9,12 +9,14 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.embers.proxy.CommonProxy;
+import teamroots.embers.world.WorldUpdater;
 
 @Mod(modid = Embers.MODID, name = Embers.MODNAME, version = Embers.VERSION, dependencies = Embers.DEPENDENCIES)
 public class Embers {
@@ -59,6 +61,7 @@ public class Embers {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		MinecraftForge.EVENT_BUS.register(new WorldUpdater()); // Fix broken IDs due to registry ID migrations for Embers blocks and items
 		MinecraftForge.EVENT_BUS.register(new EventManager());
 		MinecraftForge.EVENT_BUS.register(new ConfigManager());
         ConfigManager.init(event.getSuggestedConfigurationFile());
@@ -78,5 +81,10 @@ public class Embers {
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event){
 		//event.registerServerCommand(new CommandEmberFill());
+	}
+	
+	@EventHandler
+	public void onMissingMappings(FMLMissingMappingsEvent event) {
+		(new WorldUpdater()).onMissingMappings(event);
 	}
 }
