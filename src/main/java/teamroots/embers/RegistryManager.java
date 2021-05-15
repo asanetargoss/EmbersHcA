@@ -425,47 +425,47 @@ public class RegistryManager {
 		
 		registerFluids();
 		
-		GameRegistry.registerTileEntity(TileEntityTank.class, Embers.MODID+":tile_entity_tank");
-		GameRegistry.registerTileEntity(TileEntityFluidPipe.class, Embers.MODID+":tile_entity_pipe");
-		GameRegistry.registerTileEntity(TileEntityFluidExtractor.class, Embers.MODID+":tile_entity_pump");
-		GameRegistry.registerTileEntity(TileEntityFurnaceTop.class, Embers.MODID+":tile_entity_furnace_top");
-		GameRegistry.registerTileEntity(TileEntityFurnaceBottom.class, Embers.MODID+":tile_entity_furnace_bottom");
-		GameRegistry.registerTileEntity(TileEntityEmitter.class, Embers.MODID+":tile_entity_emitter");
-		GameRegistry.registerTileEntity(TileEntityReceiver.class, Embers.MODID+":tile_entity_receiver");
-		GameRegistry.registerTileEntity(TileEntityCopperCell.class, Embers.MODID+":tile_entity_copper_cell");
-		GameRegistry.registerTileEntity(TileEntityItemPipe.class, Embers.MODID+":tile_entity_item_pipe");
-		GameRegistry.registerTileEntity(TileEntityItemExtractor.class, Embers.MODID+":tile_entity_item_pump");
-		GameRegistry.registerTileEntity(TileEntityBin.class, Embers.MODID+":tile_entity_bin");
-		GameRegistry.registerTileEntity(TileEntityStamper.class, Embers.MODID+":tile_entity_stamper");
-		GameRegistry.registerTileEntity(TileEntityStampBase.class, Embers.MODID+":tile_entity_stamp_base");
-		GameRegistry.registerTileEntity(TileEntityEmberBore.class, Embers.MODID+":tile_entity_ember_bore");
-		GameRegistry.registerTileEntity(TileEntityMechAccessor.class, Embers.MODID+":tile_entity_mech_accessor");
-		GameRegistry.registerTileEntity(TileEntityMechCore.class, Embers.MODID+":tile_entity_mech_core");
-		GameRegistry.registerTileEntity(TileEntityActivatorTop.class, Embers.MODID+":tile_entity_activator_top");
-		GameRegistry.registerTileEntity(TileEntityActivatorBottom.class, Embers.MODID+":tile_entity_activator_bottom");
-		GameRegistry.registerTileEntity(TileEntityMixerTop.class, Embers.MODID+":tile_entity_mixer_top");
-		GameRegistry.registerTileEntity(TileEntityMixerBottom.class, Embers.MODID+":tile_entity_mixer_bottom");
-		GameRegistry.registerTileEntity(TileEntityHeatCoil.class, Embers.MODID+":tile_entity_heat_coil");
-		GameRegistry.registerTileEntity(TileEntityDropper.class, Embers.MODID+":tile_entity_dropper");
-		GameRegistry.registerTileEntity(TileEntityLargeTank.class, Embers.MODID+":tile_entity_large_tank");
-		GameRegistry.registerTileEntity(TileEntityBeamSplitter.class, Embers.MODID+":tile_entity_beam_splitter");
-		GameRegistry.registerTileEntity(TileEntityRelay.class, Embers.MODID+":tile_entity_relay");
-		GameRegistry.registerTileEntity(TileEntityCrystalCell.class, Embers.MODID+":tile_entity_crystal_cell");
-		GameRegistry.registerTileEntity(TileEntityCharger.class, Embers.MODID+":tile_entity_charger");
-		GameRegistry.registerTileEntity(TileEntityCinderPlinth.class, Embers.MODID+":tile_entity_cinder_plinth");
-		GameRegistry.registerTileEntity(TileEntityDisplayPedestal.class, Embers.MODID+":tile_entity_display_pedestal");
-		GameRegistry.registerTileEntity(TileEntityAlchemyPedestal.class, Embers.MODID+":tile_entity_alchemy_pedestal");
-		GameRegistry.registerTileEntity(TileEntityAlchemyTablet.class, Embers.MODID+":tile_entity_alchemy_tablet");
-		GameRegistry.registerTileEntity(TileEntityItemTransfer.class, Embers.MODID+":tile_entity_item_transfer");
-		GameRegistry.registerTileEntity(TileEntityBeamCannon.class, Embers.MODID+":tile_entity_beam_cannon");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityTank.class, Embers.MODID+":tile_entity_tank", Embers.MODID+":tileEntityTank");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityFluidPipe.class, Embers.MODID+":tile_entity_pipe", Embers.MODID+":tileEntityPipe");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityFluidExtractor.class, Embers.MODID+":tile_entity_pump", Embers.MODID+":tileEntityPump");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityFurnaceTop.class, Embers.MODID+":tile_entity_furnace_top", Embers.MODID+":tileEntityFurnaceTop");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityFurnaceBottom.class, Embers.MODID+":tile_entity_furnace_bottom", Embers.MODID+":tileEntityFurnaceBottom");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityEmitter.class, Embers.MODID+":tile_entity_emitter", Embers.MODID+":tileEntityEmitter");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityReceiver.class, Embers.MODID+":tile_entity_receiver", Embers.MODID+":tileEntityReceiver");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityCopperCell.class, Embers.MODID+":tile_entity_copper_cell", Embers.MODID+":tileEntityCopperCell");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityItemPipe.class, Embers.MODID+":tile_entity_item_pipe", Embers.MODID+":tileEntityItemPipe");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityItemExtractor.class, Embers.MODID+":tile_entity_item_pump", Embers.MODID+":tileEntityItemPump");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityBin.class, Embers.MODID+":tile_entity_bin", Embers.MODID+":tileEntityBin");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityStamper.class, Embers.MODID+":tile_entity_stamper", Embers.MODID+":tileEntityStamper");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityStampBase.class, Embers.MODID+":tile_entity_stamp_base", Embers.MODID+":tileEntityStampBase");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityEmberBore.class, Embers.MODID+":tile_entity_ember_bore", Embers.MODID+":tileEntityEmberBore");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityMechAccessor.class, Embers.MODID+":tile_entity_mech_accessor", Embers.MODID+":tileEntityMechAccessor");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityMechCore.class, Embers.MODID+":tile_entity_mech_core", Embers.MODID+":tileEntityMechCore");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityActivatorTop.class, Embers.MODID+":tile_entity_activator_top", Embers.MODID+":tileEntityActivatorTop");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityActivatorBottom.class, Embers.MODID+":tile_entity_activator_bottom", Embers.MODID+":tileEntityActivatorBottom");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityMixerTop.class, Embers.MODID+":tile_entity_mixer_top", Embers.MODID+":tileEntityMixerTop");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityMixerBottom.class, Embers.MODID+":tile_entity_mixer_bottom", Embers.MODID+":tileEntityMixerBottom");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityHeatCoil.class, Embers.MODID+":tile_entity_heat_coil", Embers.MODID+":tileEntityHeatCoil");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityDropper.class, Embers.MODID+":tile_entity_dropper", Embers.MODID+":tileEntityDropper");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityLargeTank.class, Embers.MODID+":tile_entity_large_tank", Embers.MODID+":tileEntityLargeTank");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityBeamSplitter.class, Embers.MODID+":tile_entity_beam_splitter", Embers.MODID+":tileEntityBeamSplitter");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityRelay.class, Embers.MODID+":tile_entity_relay", Embers.MODID+":tileEntityRelay");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityCrystalCell.class, Embers.MODID+":tile_entity_crystal_cell", Embers.MODID+":tileEntityCrystalCell");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityCharger.class, Embers.MODID+":tile_entity_charger", Embers.MODID+":tileEntityCharger");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityCinderPlinth.class, Embers.MODID+":tile_entity_cinder_plinth", Embers.MODID+":tileEntityCinderPlinth");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityDisplayPedestal.class, Embers.MODID+":tile_entity_display_pedestal", Embers.MODID+":tileEntityKnowledgeTable");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityAlchemyPedestal.class, Embers.MODID+":tile_entity_alchemy_pedestal", Embers.MODID+":tileEntityAlchemyPedestal");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityAlchemyTablet.class, Embers.MODID+":tile_entity_alchemy_tablet", Embers.MODID+":tileEntityAlchemyTablet");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityItemTransfer.class, Embers.MODID+":tile_entity_item_transfer", Embers.MODID+":tileEntityItemTransfer");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityBeamCannon.class, Embers.MODID+":tile_entity_beam_cannon", Embers.MODID+":tileEntityBeamCannon");
 		GameRegistry.registerTileEntity(TileEntityDawnstoneAnvil.class, Embers.MODID+":tile_entity_dawnstone_anvil");
 		GameRegistry.registerTileEntity(TileEntityAutoHammer.class, Embers.MODID+":tile_entity_auto_hammer");
 		GameRegistry.registerTileEntity(TileEntityItemVacuum.class, Embers.MODID+":tile_entity_vacuum");
 		GameRegistry.registerTileEntity(TileEntityBreaker.class, Embers.MODID+":tile_entity_breaker");
 		GameRegistry.registerTileEntity(TileEntitySeed.class, Embers.MODID+":tile_entity_seed");
 		GameRegistry.registerTileEntity(TileEntityEmberInjector.class, Embers.MODID+":tile_entity_ember_injector");
-		GameRegistry.registerTileEntity(TileEntityBoilerBottom.class, Embers.MODID+":tile_entity_boiler_bottom");
-		GameRegistry.registerTileEntity(TileEntityBoilerTop.class, Embers.MODID+":tile_entity_boiler_top");
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityBoilerBottom.class, Embers.MODID+":tile_entity_boiler_bottom", Embers.MODID+":tileEntityFurnaceTop"); // Not quite correct, but preserves the items inside (yes, top and bottom inversion is intentional)
+		WorldUpdater.registerTileEntityWithAlternatives(TileEntityBoilerTop.class, Embers.MODID+":tile_entity_boiler_top", Embers.MODID+":tileEntityActivatorBottom"); // Not quite correct, but preserves the items inside (yes, top and bottom inversion is intentional)
 		GameRegistry.registerTileEntity(TileEntityReactor.class, Embers.MODID+":tile_entity_reactor");
 		GameRegistry.registerTileEntity(TileEntityCombustor.class, Embers.MODID+":tile_entity_combustor");
 		GameRegistry.registerTileEntity(TileEntityCatalyzer.class, Embers.MODID+":tile_entity_catalyzer");
@@ -483,11 +483,11 @@ public class RegistryManager {
 		
 		int id = 0;
 		
-		EntityRegistry.registerModEntity(EntityEmberPacket.class, "ember_packet", id++, Embers.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityEmberProjectile.class, "ember_projectile", id++, Embers.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityAncientGolem.class, "ancient_golem", id++, Embers.instance, 64, 1, true);
+		WorldUpdater.registerModEntityWithAlternatives(EntityEmberPacket.class, "ember_packet", id++, Embers.instance, 64, 1, true, "embers.emberPacket");
+		WorldUpdater.registerModEntityWithAlternatives(EntityEmberProjectile.class, "ember_projectile", id++, Embers.instance, 64, 1, true, "embers.emberProjectile");
+		WorldUpdater.registerModEntityWithAlternatives(EntityAncientGolem.class, "ancient_golem", id++, Embers.instance, 64, 1, true, "embers.ancientGolem");
 		EntityRegistry.registerEgg(EntityAncientGolem.class, Misc.intColor(48, 38, 35), Misc.intColor(79, 66, 61));
-		EntityRegistry.registerModEntity(EntityEmberLight.class, "ember_light", id++, Embers.instance, 64, 1, true);
+		WorldUpdater.registerModEntityWithAlternatives(EntityEmberLight.class, "ember_light", id++, Embers.instance, 64, 1, true, "embers.emberLight");
 		
 		List<BiomeEntry> biomeEntries = new ArrayList<BiomeEntry>();
 		biomeEntries.addAll(BiomeManager.getBiomes(BiomeType.COOL));

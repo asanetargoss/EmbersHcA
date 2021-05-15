@@ -28,6 +28,8 @@ public class Embers {
 	@SidedProxy(clientSide = "teamroots.embers.proxy.ClientProxy",serverSide = "teamroots.embers.proxy.ServerProxy")
     public static CommonProxy proxy;
 	
+	public static final WorldUpdater worldUpdater = new WorldUpdater();
+	
 	public static CreativeTabs tab = new CreativeTabs("embers") {
     	@Override
     	public String getTabLabel(){
@@ -61,7 +63,6 @@ public class Embers {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-		MinecraftForge.EVENT_BUS.register(new WorldUpdater()); // Fix broken IDs due to registry ID migrations for Embers blocks and items
 		MinecraftForge.EVENT_BUS.register(new EventManager());
 		MinecraftForge.EVENT_BUS.register(new ConfigManager());
         ConfigManager.init(event.getSuggestedConfigurationFile());
@@ -85,6 +86,6 @@ public class Embers {
 	
 	@EventHandler
 	public void onMissingMappings(FMLMissingMappingsEvent event) {
-		(new WorldUpdater()).onMissingMappings(event);
+		worldUpdater.onMissingMappings(event); // Fix broken IDs due to registry ID migrations for Embers blocks and items
 	}
 }

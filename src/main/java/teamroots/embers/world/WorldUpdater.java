@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
@@ -15,9 +19,12 @@ import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
 import teamroots.embers.Embers;
 
 public class WorldUpdater {
+	protected final String SAVE_VERSION_KEY = "EmbersSaveVersion";
+	protected final int SAVE_VERSION = 1;
+	
 	protected Map<String, String> mappings = new HashMap<>();
 	{
-		//NOTE: By default, FMLMissingMappingsEvent only will fire for missing mappings for this mod
+		//NOTE: In 1.10.2, FMLMissingMappingsEvent only will fire for items and blocks. To handle tile entities in a somewhat more version-agnostic manner, we use WorldUpdater.registerTileEntityWithAlternatives lower down
 		
 		// Special item and block mappings for things that were removed, renamed in a special way, or replaced with something different
 		// Some of these are compatible with Embers Rekindled, but in a few cases you will notice missing IDs, if you are migrating from this Embers version to Embers Rekindled
@@ -26,6 +33,14 @@ public class WorldUpdater {
 		mappings.put("glimmerLamp", "archaic_light");
 		mappings.put("coreStone", "archaic_tile");
 		mappings.put("itemGauge", "item_gauge");
+		
+		// Fluid block mappings
+		mappings.put("moltenIron", "iron");
+		mappings.put("moltenGold", "gold");
+		mappings.put("moltenLead", "lead");
+		mappings.put("moltenCopper", "copper");
+		mappings.put("moltenSilver", "silver");
+		mappings.put("moltenDawnstone", "dawnstone");
 		
 		// Relatively noncontroversial item and block mappings, in principle compatible with Embers Rekindled
 		mappings.put("advancedEdge", "advanced_edge");
@@ -189,6 +204,23 @@ public class WorldUpdater {
 					continue;
 				}
 			}
+		}
+	}
+
+	// Called by RegistryManager
+	// GameRegistry.registerTileEntityWithAlternatives allows to convert tile entities over from old worlds with old tile entity IDs in 1.10.2/1.11.2.
+	// In 1.12.2, the FMLMissingMappingsEvent was generalized to also support tile entities, so registerTileEntityWithAlternatives should not be used in that version
+	public static void registerTileEntityWithAlternatives(Class<? extends TileEntity> tileEntityClass, String id, String... alternatives) {
+		GameRegistry.registerTileEntityWithAlternatives(tileEntityClass, id, alternatives);
+	}
+
+	// Called by RegistryManager
+	// Presumably, EntityList was overhauled/removed some time post-1.10, so we're abstracting this out
+	// Note that alternative names must include the mod ID. For example: embers.ancientGolem or embers:ancient_golem
+	public static void registerModEntityWithAlternatives(Class<? extends Entity> entityClass, String entityName, int id, Object mod, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, String...alternatives) {
+		EntityRegistry.registerModEntity(entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates);
+		for (String fullAlternativeMobName : alternatives) {
+			EntityList.field_75625_b.put(fullAlternativeMobName, entityClass);
 		}
 	}
 }
