@@ -1,13 +1,13 @@
 [
 {
   "modid": "embers",
-  "name": "Embers",
+  "name": "Embers HcA Edition",
   "description": "Dwarven-style Magitech Mod",
-  "version": "0.216",
-  "mcversion": "1.11.2",
+  "version": "0.300.hca.1",
+  "mcversion": "1.10.2",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Elucent","AlexisMachina","ShadowGamerXY","werty1124"],
+  "authorList": ["Elucent","AlexisMachina","ShadowGamerXY","werty1124", "asanetargoss"],
   "credits": "",
   "logoFile": "",
   "screenshots": [],
