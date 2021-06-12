@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.embers.compat.RegistryManagerCompat;
 import teamroots.embers.proxy.CommonProxy;
 import teamroots.embers.world.WorldUpdater;
 
@@ -23,7 +25,7 @@ public class Embers {
 	public static final String MODID = "embers";
 	public static final String MODNAME = "Embers HcA Edition";
 	public static final String VERSION = "0.300.hca.1";
-	public static final String DEPENDENCIES = "";
+	public static final String DEPENDENCIES = "after:thaumcraft";
 	
 	@SidedProxy(clientSide = "teamroots.embers.proxy.ClientProxy",serverSide = "teamroots.embers.proxy.ServerProxy")
     public static CommonProxy proxy;
@@ -63,6 +65,7 @@ public class Embers {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		RegistryManagerCompat.modMap = Loader.instance().getIndexedModList();
 		MinecraftForge.EVENT_BUS.register(new EventManager());
 		MinecraftForge.EVENT_BUS.register(new ConfigManager());
         ConfigManager.init(event.getSuggestedConfigurationFile());

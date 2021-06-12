@@ -107,6 +107,12 @@ fluid.astralite=Molten Astralite
 fluid.dawnstone=Molten Dawnstone
 fluid.umberSteel=Molten Umber Steel
 
+# Thaumcraft Compat
+fluid.quicksilver=Molten Quicksilver
+fluid.brass=Molten Alchemical Brass
+fluid.thaumium=Molten Thaumium
+fluid.void=Molten Void Metal
+
 item.ingot_copper.name=Copper Ingot
 item.ingot_silver.name=Silver Ingot
 item.ingot_lead.name=Lead Ingot

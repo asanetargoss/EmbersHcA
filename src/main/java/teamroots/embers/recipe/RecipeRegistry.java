@@ -23,6 +23,7 @@ import net.minecraftforge.oredict.RecipeSorter.Category;
 import teamroots.embers.ConfigManager;
 import teamroots.embers.Embers;
 import teamroots.embers.RegistryManager;
+import teamroots.embers.compat.RegistryManagerCompat;
 import teamroots.embers.item.EnumStampType;
 import teamroots.embers.util.ItemUtil;
 
@@ -1131,6 +1132,8 @@ public class RecipeRegistry {
 				new ItemStack(RegistryManager.plate_dawnstone), 
 				new ItemStack(RegistryManager.ingot_silver), 
 				new ItemStack(RegistryManager.flame_barrier,1)));
+		
+		RegistryManagerCompat.initRecipes();
 	}
 	
 	public static ItemStampingRecipe getStampingRecipe(ItemStack stack, FluidStack fluid, EnumStampType type){

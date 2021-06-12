@@ -39,6 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import teamroots.embers.block.*;
 import teamroots.embers.block.fluid.*;
+import teamroots.embers.compat.RegistryManagerCompat;
 import teamroots.embers.damage.*;
 import teamroots.embers.entity.*;
 import teamroots.embers.fluid.*;
@@ -563,6 +564,8 @@ public class RegistryManager {
 		FluidRegistry.registerFluid(fluid_molten_electrum = new FluidMoltenElectrum());
 		blocks.add(block_molten_electrum = (new BlockMoltenElectrum("electrum",false)));
 		FluidRegistry.addBucketForFluid(fluid_molten_electrum);
+		
+		RegistryManagerCompat.registerFluids();
 	}
 	
 	@SideOnly(Side.CLIENT)

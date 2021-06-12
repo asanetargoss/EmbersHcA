@@ -80,6 +80,34 @@
                     "fluid": "tin"
                 }
             }
+        ],
+        "quicksilver": [
+            {
+                "custom": {
+                    "fluid": "quicksilver"
+                }
+            }
+        ],
+        "brass": [
+            {
+                "custom": {
+                    "fluid": "brass"
+                }
+            }
+        ],
+        "thaumium": [
+            {
+                "custom": {
+                    "fluid": "thaumium"
+                }
+            }
+        ],
+        "void": [
+            {
+                "custom": {
+                    "fluid": "void"
+                }
+            }
         ]
     }
 }
