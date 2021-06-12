@@ -34,23 +34,34 @@ public class MessageTEUpdate implements IMessage {
 	public void toBytes(ByteBuf buf) {
 		ByteBufUtils.writeTag(buf, tag);
 	}
+	
+	public static class Task implements Runnable {
+		MessageTEUpdate message;
+		
+		public Task(MessageTEUpdate message) {
+			this.message = message;
+		}
+		
+		@Override
+		public void run() {
+			NBTTagList list = message.tag.getTagList("data", Constants.NBT.TAG_COMPOUND);
+			for (int i = 0; i < list.tagCount(); i ++){
+				NBTTagCompound tag = list.getCompoundTagAt(i);
+				TileEntity t = Minecraft.getMinecraft().player.getEntityWorld().getTileEntity(new BlockPos(tag.getInteger("x"),tag.getInteger("y"),tag.getInteger("z")));
+	    		if (t != null){
+	    			t.readFromNBT(tag);
+	    			t.markDirty();
+	    		}
+			}
+		}
+	}
 
     public static class MessageHolder implements IMessageHandler<MessageTEUpdate,IMessage>
     {
     	@SideOnly(Side.CLIENT)
         @Override
         public IMessage onMessage(final MessageTEUpdate message, final MessageContext ctx) {
-    		Minecraft.getMinecraft().addScheduledTask(()-> {
-    			NBTTagList list = message.tag.getTagList("data", Constants.NBT.TAG_COMPOUND);
-    			for (int i = 0; i < list.tagCount(); i ++){
-    				NBTTagCompound tag = list.getCompoundTagAt(i);
-    				TileEntity t = Minecraft.getMinecraft().player.getEntityWorld().getTileEntity(new BlockPos(tag.getInteger("x"),tag.getInteger("y"),tag.getInteger("z")));
-		    		if (t != null){
-		    			t.readFromNBT(tag);
-		    			t.markDirty();
-		    		}
-    			}
-	    	});
+    		Minecraft.getMinecraft().addScheduledTask(new Task(message));
     		return null;
 	    }
     }
