@@ -23,7 +23,7 @@ import teamroots.embers.world.WorldUpdater;
 @Mod(modid = Embers.MODID, name = Embers.MODNAME, version = Embers.VERSION, dependencies = Embers.DEPENDENCIES)
 public class Embers {
 	public static final String MODID = "embers";
-	public static final String MODNAME = "Embers HcA Edition";
+	public static final String MODNAME = "Embers HcA";
 	public static final String VERSION = "0.300.hca.1";
 	public static final String DEPENDENCIES = "after:thaumcraft";
 	
