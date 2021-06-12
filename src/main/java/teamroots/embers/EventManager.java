@@ -156,6 +156,9 @@ public class EventManager {
 	static EntityPlayer clientPlayer = null;
 	
 	public static void markTEForUpdate(BlockPos pos, TileEntity tile){
+		if (!tile.hasWorld() || tile.getWorld().isRemote) {
+			return;
+		}
 		if (!toUpdate.containsKey(pos)){
 			toUpdate.put(pos, tile);
 		}
