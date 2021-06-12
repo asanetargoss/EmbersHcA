@@ -1,5 +1,8 @@
 package teamroots.embers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -58,6 +61,8 @@ public class Embers {
 	
     @Instance("embers")
     public static Embers instance;
+    
+    public static Logger LOGGER = LogManager.getLogger("Embers early init");
 
 	static {
 		FluidRegistry.enableUniversalBucket();
@@ -65,6 +70,7 @@ public class Embers {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		LOGGER = event.getModLog();
 		RegistryManagerCompat.modMap = Loader.instance().getIndexedModList();
 		MinecraftForge.EVENT_BUS.register(new EventManager());
 		MinecraftForge.EVENT_BUS.register(new ConfigManager());

@@ -630,6 +630,10 @@ public class EventManager {
 			for (int i = 0; i < updateArray.length; i ++){
 				TileEntity t = updateArray[i];
 				if (!event.world.isRemote){
+					if (t == null) {
+						Embers.LOGGER.warn("Null tile entity in updateArray in EventManager::onWorldTick");
+						continue;
+					}
 					list.appendTag(t.getUpdateTag());
 				}
 			}
