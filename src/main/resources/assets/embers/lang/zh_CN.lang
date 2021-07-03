@@ -294,7 +294,7 @@ embers.jei.recipe.melter=熔炼配方
 embers.jei.recipe.mixer=合金配方
 embers.jei.recipe.alchemy=炼金配方
 
-entity.ancient_golem.name=太古魔像
+entity.embers.ancient_golem.name=太古魔像
 
 death.attack.ember=%1$s已被焚化。
 death.attack.ember.player=%1$s被%2$s焚化了。

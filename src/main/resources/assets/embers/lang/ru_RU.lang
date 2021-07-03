@@ -294,7 +294,7 @@ embers.jei.recipe.melter=Плавление
 embers.jei.recipe.mixer=Смешивание
 embers.jei.recipe.alchemy=Алхимия
 
-entity.ancient_golem.name=Древний голем
+entity.embers.ancient_golem.name=Древний голем
 
 death.attack.ember=%1$s испепелён.
 death.attack.ember.player=%1$s испепелён %2$s.

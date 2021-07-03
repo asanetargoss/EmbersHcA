@@ -309,7 +309,7 @@ embers.jei.recipe.melter=Melting Recipe
 embers.jei.recipe.mixer=Mixing Recipe
 embers.jei.recipe.alchemy=Alchemy Recipe
 
-entity.ancient_golem.name=Ancient Golem
+entity.embers.ancient_golem.name=Ancient Golem
 
 death.attack.ember=%1$s was incinerated
 death.attack.ember.player=%1$s was incinerated by %2$s
