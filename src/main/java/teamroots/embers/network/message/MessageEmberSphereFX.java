@@ -1,6 +1,7 @@
 package teamroots.embers.network.message;
 
 import java.util.Random;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -45,12 +46,12 @@ public class MessageEmberSphereFX implements IMessage {
     	@SideOnly(Side.CLIENT)
         @Override
         public IMessage onMessage(final MessageEmberSphereFX message, final MessageContext ctx) {
-    		World world = Minecraft.getMinecraft().world;
-			if (world.isRemote){
+    		Minecraft.getMinecraft().addScheduledTask(new Runnable() {public void run() {
+	    		World world = Minecraft.getMinecraft().world;
 				for (double i = 0; i < 24; i ++){
 					ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.0125f*(random.nextFloat()-0.5f), 0.0125f*(random.nextFloat()-0.5f), 0.0125f*(random.nextFloat()-0.5f), 255, 64, 16, 3.0f+random.nextFloat(), 36+random.nextInt(24));
 				}
-			}
+    		}});
     		return null;
         }
     }

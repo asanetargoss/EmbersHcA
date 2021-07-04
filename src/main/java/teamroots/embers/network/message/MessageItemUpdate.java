@@ -47,12 +47,12 @@ public class MessageItemUpdate implements IMessage {
     	@SideOnly(Side.CLIENT)
         @Override
         public IMessage onMessage(final MessageItemUpdate message, final MessageContext ctx) {
-    		Minecraft.getMinecraft().addScheduledTask(()-> {
+    		Minecraft.getMinecraft().addScheduledTask(new Runnable() {public void run() {
 	    		EntityPlayer player = Minecraft.getMinecraft().world.getPlayerEntityByUUID(message.id);
 	    		if (player != null){
 	    			player.inventory.getStackInSlot(message.slot).setTagCompound(message.tag);
 	    		}
-	    	});
+    		}});
     		return null;
 	    }
     }

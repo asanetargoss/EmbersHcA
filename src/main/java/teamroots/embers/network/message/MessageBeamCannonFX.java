@@ -43,7 +43,7 @@ public class MessageBeamCannonFX implements IMessage {
     	@SideOnly(Side.CLIENT)
         @Override
         public IMessage onMessage(final MessageBeamCannonFX message, final MessageContext ctx) {
-    		Minecraft.getMinecraft().addScheduledTask(()-> {
+    		Minecraft.getMinecraft().addScheduledTask(new Runnable() {public void run() {
 	    		if ((Minecraft.getMinecraft().player.getEntityWorld()).getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))) instanceof TileEntityBeamCannon){
 	    			TileEntityBeamCannon cannon = (TileEntityBeamCannon)Minecraft.getMinecraft().player.getEntityWorld().getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z")));
 
@@ -67,7 +67,7 @@ public class MessageBeamCannonFX implements IMessage {
 						}
 					}
 				}
-	    	});
+    		}});
     		return null;
 	    }
     }
